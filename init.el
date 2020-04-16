@@ -1,0 +1,56 @@
+(package-initialize)
+
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+
+;; 关闭工具栏，tool-bar-mode 即为一个 Minor Mode
+(tool-bar-mode -1)
+
+;; 关闭文件滑动控件
+(scroll-bar-mode -1)
+
+;; 显示行号
+(global-linum-mode 1)
+
+;; 关闭启动帮助画面
+(setq inhibit-splash-screen 1)
+
+;; 更改显示字体大小 16pt
+;; http://stackoverflow.com/questions/294664/how-to-set-the-font-size-in-emacs
+(set-face-attribute 'default nil :height 120)
+
+(setq auto-save-default nil)
+(setq make-backup-files nil)
+
+(global-hl-line-mode 1)
+(set-face-background 'hl-line "#3e4446")
+(set-face-foreground 'highlight nil)
+
+
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+(setq indent-line-function 'insert-tab)
+(setq c-default-style "linux"
+      c-basic-offset 4)
+
+(delete-selection-mode 1)
+
+(if (featurep 'cocoa)
+    (progn
+      (setq ns-use-native-fullscreen nil)
+      (setq ns-use-fullscreen-animation nil)
+
+      (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
+
+      (run-at-time "2sec" nil
+                   (lambda ()
+                     (toggle-frame-fullscreen)
+                     )))
+  (require 'fullscreen)
+  (fullscreen))
+
+
+;; Package Management
+;; -----------------------------------------------------------------
+(require 'init-packages)
+(require 'my-packages)
+(require 'my-keybindings)

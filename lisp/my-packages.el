@@ -113,7 +113,8 @@
   	(interactive)
 	(let* ((b (get-buffer "hulk_crash.org")))
 	  (if b
-		(switch-to-buffer b)
+        (progn
+          (switch-to-buffer-other-frame b))
   		(switch-to-buffer-other-frame (find-file "~/work/tmp/hulk_crash.org")))))
 
 

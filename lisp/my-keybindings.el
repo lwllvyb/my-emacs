@@ -20,6 +20,7 @@
   "k" 'symbol-overlay-put
   "K" 'symbol-overlay-remove-all
   "a" 'org-agenda
+  "t" 'goto-tmp
   )
 
 (global-set-key (kbd "C-x o") 'switch-window)

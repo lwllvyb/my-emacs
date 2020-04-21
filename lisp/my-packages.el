@@ -109,15 +109,22 @@
            "open ‘dired’ at the root of the project")
           1)))
 
-(defun lwl-tmp()
+(defun lwl/goto-other-frame(path)
+  ""
   	(interactive)
-	(let* ((b (get-buffer "hulk_crash.org")))
+	(let* ((name (file-name-nondirectory path))
+           (b (get-buffer name))
+           (w (get-buffer-window name)))
 	  (if b
-        (progn
-          (switch-to-buffer-other-frame b))
-  		(switch-to-buffer-other-frame (find-file "~/work/tmp/hulk_crash.org")))))
-
-
+		(progn
+                 (if w
+                     (switch-to-buffer b)
+                   (switch-to-buffer-other-frame b 'norecord)))
+		(switch-to-buffer-other-frame (find-file path)))))
+(defun goto-tmp()
+  (interactive)
+  (lwl/goto-other-frame "~/work/tmp/hulk_crash.org")
+  )
 ; (setq projectile-switch-project-action 'lwl/projectile-after-switch-action)
 ; (add-hook 'projectile-find-file-hook 'lwl/projectile-after-switch-action)
 (add-hook 'projectile-after-switch-project-hook 'lwl/projectile-after-switch-action)

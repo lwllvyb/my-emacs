@@ -21,10 +21,8 @@
 			   exec-path-from-shell
 			   evil
 			   evil-leader
-			   projectile
 			   use-package
 			   dashboard
-			   all-the-icons
 			   ripgrep
 			   magit
 			   evil-magit
@@ -32,6 +30,8 @@
 			   company-go
 			   posframe
 			   ivy
+			   ivy-posframe
+			   projectile
 			   counsel-projectile
 			   switch-window
 			   symbol-overlay
@@ -54,6 +54,7 @@
 			   python-mode
 			   ;; lsp
 			   eglot
+			   eldoc-box
 			   ) "Default packages")
 
 (setq package-selected-packages my/packages)

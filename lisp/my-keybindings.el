@@ -2,23 +2,24 @@
 
 (evil-leader/set-leader ",")
 (evil-leader/set-key
-  "pa" 'projectile-discover-projects-in-director
+  "pa" 'projectile-discover-projects-in-directory
   "pf" 'counsel-projectile-find-file
-  "pp" 'counsel-projectile-switch-project
+  "pp" 'projectile-switch-project
   "ps" 'projectile-ripgrep
   "pr" 'projectile-recentf
+  "o"  'counsel-imenu
   "fr" 'xref-find-references
   "fd" 'xref-find-definitions
   "ff" 'counsel-find-file
   "fp" 'switch-to-buffer
   "bd" 'kill-buffer-and-window
-  "ms" 'bookmark-set
   "mm" 'counsel-bookmark
   "md" 'bookmark-delete
   "gs" 'magit-status
   "gb" 'magit-blame
   "k" 'symbol-overlay-put
   "K" 'symbol-overlay-remove-all
+  "a" 'org-agenda
   )
 
 (global-set-key (kbd "C-x o") 'switch-window)
@@ -27,7 +28,6 @@
 (global-set-key (kbd "C-l") #'windmove-right)
 (global-set-key (kbd "C-k") #'windmove-up)
 (global-set-key (kbd "C-j") #'windmove-down)
-
 
 ;; 文件末尾
 (provide 'my-keybindings)

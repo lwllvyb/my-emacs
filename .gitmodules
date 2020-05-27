@@ -7,3 +7,12 @@
 [submodule "packages/goenv"]
 	path = packages/goenv
 	url = https://github.com/lwllvyb/goenv
+[submodule "awesome-pair"]
+	path = awesome-pair
+	url = https://github.com/manateelazycat/awesome-pair
+[submodule "packages/awesome-pair"]
+	path = packages/awesome-pair
+	url = https://github.com/manateelazycat/awesome-pair
+[submodule "packages/nox"]
+	path = packages/nox
+	url = https://github.com/manateelazycat/nox

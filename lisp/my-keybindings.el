@@ -6,7 +6,7 @@
   "pf" 'counsel-projectile-find-file
   "pp" 'projectile-switch-project
   "ps" 'projectile-ripgrep
-  "pr" 'projectile-recentf
+  "pr" 'counsel-recentf
   "o"  'counsel-imenu
   "fr" 'xref-find-references
   "fd" 'xref-find-definitions

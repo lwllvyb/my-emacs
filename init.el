@@ -13,6 +13,8 @@
 
 ;; 关闭启动帮助画面
 (setq inhibit-splash-screen 1)
+;; 最近打开的文件
+(recentf-mode)
 
 ;; 更改显示字体大小 16pt
 ;; http://stackoverflow.com/questions/294664/how-to-set-the-font-size-in-emacs
@@ -76,4 +78,4 @@
  '(dired-use-ls-dired nil)
  '(package-selected-packages
    (quote
-    (treemacs ranger benchmark-init exec-path-from-shell evil evil-leader use-package dashboard ripgrep magit evil-magit company company-go posframe ivy ivy-posframe projectile counsel-projectile switch-window symbol-overlay all-the-icons srcery-theme company smooth-scrolling hungry-delete swiper counsel smartparens popwin org org-bullets go-mode python-mode eglot eldoc-box))))
+    (rainbow-delimiters highlight-parentheses treemacs ranger benchmark-init exec-path-from-shell evil evil-leader use-package dashboard ripgrep magit evil-magit company company-go posframe ivy ivy-posframe projectile counsel-projectile switch-window symbol-overlay all-the-icons srcery-theme company smooth-scrolling hungry-delete swiper counsel smartparens popwin org org-bullets go-mode python-mode eglot eldoc-box))))

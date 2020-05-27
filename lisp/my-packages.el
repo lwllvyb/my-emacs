@@ -1,8 +1,56 @@
 (require 'cl)
 (require 'use-package)
 
+;;==========================================================================
 (evil-mode 1)
 (global-evil-leader-mode)
+;;==========================================================================
+(show-paren-mode)
+(highlight-parentheses-mode)
+;;==========================================================================
+(add-to-list 'load-path "~/.emacs.d/packages/awesome-pair") ; add awesome-pair to your load-path
+(require 'awesome-pair)
+(dolist (hook (list
+               'c-mode-common-hook
+               'c-mode-hook
+               'c++-mode-hook
+               'emacs-lisp-mode-hook
+               'lisp-interaction-mode-hook
+               'lisp-mode-hook
+               'sh-mode-hook
+               'makefile-gmake-mode-hook
+               'python-mode-hook
+               'go-mode-hook
+               'rust-mode-hook
+               'minibuffer-inactive-mode-hook
+               ))
+  (add-hook hook '(lambda () (awesome-pair-mode 1))))
+(define-key awesome-pair-mode-map (kbd "(") 'awesome-pair-open-round)
+(define-key awesome-pair-mode-map (kbd "[") 'awesome-pair-open-bracket)
+(define-key awesome-pair-mode-map (kbd "{") 'awesome-pair-open-curly)
+(define-key awesome-pair-mode-map (kbd ")") 'awesome-pair-close-round)
+(define-key awesome-pair-mode-map (kbd "]") 'awesome-pair-close-bracket)
+(define-key awesome-pair-mode-map (kbd "}") 'awesome-pair-close-curly)
+(define-key awesome-pair-mode-map (kbd "=") 'awesome-pair-equal)
+
+(define-key awesome-pair-mode-map (kbd "%") 'awesome-pair-match-paren)
+(define-key awesome-pair-mode-map (kbd "\"") 'awesome-pair-double-quote)
+
+(define-key awesome-pair-mode-map (kbd "SPC") 'awesome-pair-space)
+
+(define-key awesome-pair-mode-map (kbd "M-o") 'awesome-pair-backward-delete)
+(define-key awesome-pair-mode-map (kbd "C-d") 'awesome-pair-forward-delete)
+(define-key awesome-pair-mode-map (kbd "C-k") 'awesome-pair-kill)
+
+(define-key awesome-pair-mode-map (kbd "M-\"") 'awesome-pair-wrap-double-quote)
+(define-key awesome-pair-mode-map (kbd "M-[") 'awesome-pair-wrap-bracket)
+(define-key awesome-pair-mode-map (kbd "M-{") 'awesome-pair-wrap-curly)
+(define-key awesome-pair-mode-map (kbd "M-(") 'awesome-pair-wrap-round)
+(define-key awesome-pair-mode-map (kbd "M-)") 'awesome-pair-unwrap)
+
+(define-key awesome-pair-mode-map (kbd "M-p") 'awesome-pair-jump-right)
+(define-key awesome-pair-mode-map (kbd "M-n") 'awesome-pair-jump-left)
+(define-key awesome-pair-mode-map (kbd "M-:") 'awesome-pair-jump-out-pair-and-newline)
 ;;==========================================================================
 (defcustom centaur-logo (expand-file-name "logo.png" user-emacs-directory)
   "Set Centaur logo. nil means official logo."
@@ -133,26 +181,39 @@
 ;;(add-hook 'projectile-after-switch-project-hook #'my-switch-project-hook)
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/packages/goenv"))
 (require 'goenv)
+(setq goenv-default-gopath (expand-file-name "~/work/mebs"))
 
 ;;==========================================================================
+;; LSP
 
-;;(add-to-list 'load-path "~/.emacs.d/packages/nox") ; add nox to your load-path
-;;(require 'nox)
+(add-to-list 'load-path "~/.emacs.d/packages/nox") ; add nox to your load-path
+(require 'nox)
 
+(dolist (hook (list
+                'go-mode-hook
+                'rust-mode-hook
+                'python-mode-hook
+                'sh-mode-hook
+                'c-mode-common-hook
+                'c-mode-hook
+                'c++-mode-hook
+                ))
+   (add-hook hook '(lambda () (nox-ensure))))
+
+;;(require 'eglot)
+;;(set eglot-put-doc-in-help-buffer nil)
+;;(setq eglot-auto-display-help-buffer nil)
 ;;(dolist (hook (list
-  ;              'go-mode-hook
-  ;              'rust-mode-hook
-  ;              'python-mode-hook
-  ;              'sh-mode-hook
-  ;              'c-mode-common-hook
-  ;              'c-mode-hook
-  ;              'c++-mode-hook
-  ;              ))
-  ; (add-hook hook '(lambda () (nox-ensure))))
-
-(require 'eglot)
-(set eglot-put-doc-in-help-buffer nil)
-(setq eglot-auto-display-help-buffer nil)
+;			   'go-mode-hook
+;			   'rust-mode-hook
+;			   'python-mode-hook
+;			   'sh-mode-hook
+;			   'c-mode-common-hook
+;			   'c-mode-hook
+;			   'c++-mode-hook
+;			   ))
+;  (add-hook hook '(lambda () (eglot-ensure))))
+;;==========================================================================
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/packages/awesome-tab"))
 (require 'awesome-tab)
@@ -161,16 +222,6 @@
 (global-set-key (kbd "s-1") 'awesome-tab-backward-tab)
 (global-set-key (kbd "s-2") 'awesome-tab-forward-tab)
 
-(dolist (hook (list
-			   'go-mode-hook
-			   'rust-mode-hook
-			   'python-mode-hook
-			   'sh-mode-hook
-			   'c-mode-common-hook
-			   'c-mode-hook
-			   'c++-mode-hook
-			   ))
-  (add-hook hook '(lambda () (eglot-ensure))))
 
 (require 'evil-magit)
 
@@ -261,6 +312,10 @@
             (tags-todo "theory")
             ))
           ))
+;;==========================================================================
+;; go
+ (setq gofmt-command "goimports")
+ (add-hook 'before-save-hook 'gofmt-before-save)
 ;;==========================================================================
 ;; 文件末尾
 (provide 'my-packages)

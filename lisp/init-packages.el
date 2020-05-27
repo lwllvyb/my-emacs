@@ -8,9 +8,9 @@
     (require 'package)
     (package-initialize)
     (setq package-archives 
-      	'(("melpa-cn" . "~/OneDrive/bin/emacs_plugins/melpa/")
-       	("org-cn"   . "~/OneDrive/bin/emacs_plugins/org/")
-       	("gnu-cn"   . "~/OneDrive/bin/emacs_plugins/gnu/"))))
+      	'(("melpa-cn" . "~/emacs_plugins/melpa/")
+       	("org-cn"   . "~/emacs_plugins/org/")
+       	("gnu-cn"   . "~/emacs_plugins/gnu/"))))
 
 ;; cl - Common Lisp Extension
 (require 'cl)
@@ -35,6 +35,8 @@
 			   counsel-projectile
 			   switch-window
 			   symbol-overlay
+         all-the-icons
+         treemacs
 			   
 				;; theme
 			   srcery-theme

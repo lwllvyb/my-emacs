@@ -131,8 +131,10 @@
 
 ;;==========================================================================
 ;;(add-hook 'projectile-after-switch-project-hook #'my-switch-project-hook)
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/packages/goenv"))
+(require 'goenv)
 
-(setenv "GOPATH" "/Users/lesswish/work/mebs")
+;;==========================================================================
 
 ;;(add-to-list 'load-path "~/.emacs.d/packages/nox") ; add nox to your load-path
 ;;(require 'nox)
@@ -205,9 +207,6 @@
 (require 'awesome-tab)
 (awesome-tab-mode t)
 
-;;==========================================================================
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/packages/all-the-icons.el"))
-(require 'all-the-icons)
 
 ;;==========================================================================
 (require 'ivy-posframe)

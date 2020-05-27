@@ -1,3 +1,9 @@
 [submodule "packages/awesome-tab"]
 	path = packages/awesome-tab
 	url = https://github.com/manateelazycat/awesome-tab
+[submodule "packages/all-the-icons.el"]
+	path = packages/all-the-icons.el
+	url = https://github.com/domtronn/all-the-icons.el
+[submodule "packages/goenv"]
+	path = packages/goenv
+	url = https://github.com/lwllvyb/goenv

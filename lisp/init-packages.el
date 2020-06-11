@@ -37,6 +37,8 @@
 			   symbol-overlay
          all-the-icons
          treemacs
+         treemacs-evil
+         treemacs-projectile
 			   
 				;; theme
 			   srcery-theme

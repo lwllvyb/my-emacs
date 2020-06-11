@@ -182,6 +182,7 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/packages/goenv"))
 (require 'goenv)
 (setq goenv-default-gopath (expand-file-name "~/work/mebs"))
+(goenv-activate (projectile-project-root))
 
 ;;==========================================================================
 ;; LSP
@@ -316,6 +317,43 @@
 ;; go
  (setq gofmt-command "goimports")
  (add-hook 'before-save-hook 'gofmt-before-save)
+;;==========================================================================
+   (with-eval-after-load 'treemacs-evil
+    (define-key evil-treemacs-state-map (kbd "F") 'treemacs-create-file)
+    (define-key evil-treemacs-state-map (kbd "+") 'treemacs-create-dir))
+;;==========================================================================
+(defun paste-image-from-clipboard ()
+  "保存剪切板图片为 Y-m-d-H-M-S.png，插入 Markdown/Org 图片链接."
+  (interactive)
+  (progn
+    (setq file (format-time-string"%Y-%m-%d-%H-%M-%S.jpg"))
+    (cond ((derived-mode-p 'markdown-mode)
+           (unless (file-exists-p (file-name-directory "imgs/"))
+             (make-directory (file-name-directory "imgs/")))
+           (call-process-shell-command (format "pngpaste imgs/%s" file))
+           (insert (format "![](%s)" file)))
+
+          ((derived-mode-p 'org-mode)
+           (unless (file-exists-p (file-name-directory "imgs/"))
+             (make-directory (file-name-directory "imgs/")))
+           (call-process-shell-command (format "pngpaste imgs/%s" file))
+           (insert (format "[[./imgs/%s]]" file))))
+    ))
+;;==========================================================================
+
+(defun aborn/simple-git-commit-push (msg)
+  "Simple commit current git project and push to its upstream."
+  (interactive "sCommit Message: ")
+  (when (= 0 (length msg))
+    (setq msg (format-time-string "commit by magit in emacs@%Y-%m-%d %H:%M:%S"
+                                  (current-time))))
+  (message "commit message is %s" msg)
+  (when (and buffer-file-name
+             (buffer-modified-p))
+    (save-buffer))                   ;; save it first if modified.
+  (magit-stage-modified)
+  (magit-commit (list "-m" msg))
+  (magit-push-current-to-upstream nil))
 ;;==========================================================================
 ;; 文件末尾
 (provide 'my-packages)

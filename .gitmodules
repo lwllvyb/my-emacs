@@ -16,3 +16,6 @@
 [submodule "packages/nox"]
 	path = packages/nox
 	url = https://github.com/manateelazycat/nox
+[submodule "packages/redguardtoo/company-ctags"]
+	path = packages/redguardtoo/company-ctags
+	url = https://github.com/redguardtoo/company-ctags

@@ -2,6 +2,9 @@
 (require 'use-package)
 
 ;;==========================================================================
+(doom-modeline-mode 1)
+(setq doom-modeline-vcs-max-length 50)
+;;==========================================================================
 (evil-mode 1)
 (global-evil-leader-mode)
 ;;==========================================================================
@@ -261,15 +264,35 @@
 
 
 ;;==========================================================================
-(require 'ivy-posframe)
-;; display at `ivy-posframe-style'
-;; (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display)))
-(setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
-;;(setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-window-center)))
-;; (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-bottom-left)))
-;; (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-window-bottom-left)))
-;; (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-top-center)))
-(ivy-posframe-mode 1)
+(use-package ivy-posframe
+  :diminish
+  :config
+  (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center))
+        ivy-posframe-parameters '((left-fringe . 2)
+                                  (right-fringe . 2)
+                                  ;;(font . "Dejavu Sans Mono For Powerline-14")
+                                  (line-spacing . 1))
+        ivy-posframe-height-alist '((t . 25))
+        ivy-posframe-width 140)
+  (set-face-attribute 'ivy-posframe-border nil :foreground "green")
+  (set-face-attribute 'ivy-posframe nil :background "#575757")
+  ;; (set-face-attribute 'ivy-posframe-cursor nil :inherit 'cursor)
+  (ivy-posframe-mode 1))
+
+(use-package ivy-xref
+  :ensure t
+  :init
+  ;; xref initialization is different in Emacs 27 - there are two different
+  ;; variables which can be set rather than just one
+  (when (>= emacs-major-version 27)
+    (setq xref-show-definitions-function #'ivy-xref-show-defs))
+  ;; Necessary in Emacs <27. In Emacs 27 it will affect all xref-based
+  ;; commands other than xref-find-definitions (e.g. project-find-regexp)
+  ;; as well
+  (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
+
+(global-set-key (kbd "M-x") 'counsel-M-x)
+(setq ivy-initial-inputs-alist nil)
 
 ;;==========================================================================
 ;;(require 'eldoc-box)
@@ -321,6 +344,20 @@
    (with-eval-after-load 'treemacs-evil
     (define-key evil-treemacs-state-map (kbd "F") 'treemacs-create-file)
     (define-key evil-treemacs-state-map (kbd "+") 'treemacs-create-dir))
+;;==========================================================================
+(defun kill-other-buffers ()
+    "Kill all other buffers."
+    (interactive)
+    (mapc 'kill-buffer
+          (delq (current-buffer)
+                (remove-if-not 'buffer-file-name (buffer-list)))))
+;;==========================================================================
+;; company-ctags
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/packages/redguardtoo/company-ctags/"))
+(require 'company-ctags)
+(with-eval-after-load 'company
+  (company-ctags-auto-setup))
+
 ;;==========================================================================
 ;; 文件末尾
 (provide 'my-packages)

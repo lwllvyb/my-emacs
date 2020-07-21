@@ -5,10 +5,11 @@
   "pa" 'projectile-discover-projects-in-directory
   "pf" 'counsel-projectile-find-file
   "pp" 'projectile-switch-project
-  "ps" 'projectile-ripgrep
+  "s" 'projectile-ripgrep
   "pr" 'counsel-recentf
+  "r" 'counsel-recentf
   "o"  'counsel-imenu
-  "fr" 'xref-find-references
+  "r" 'xref-find-references
   "fd" 'xref-find-definitions
   "ff" 'counsel-find-file
   "fp" 'switch-to-buffer

@@ -39,6 +39,7 @@
          treemacs
          treemacs-evil
          treemacs-projectile
+         doom-modeline
 			   
 				;; theme
 			   srcery-theme
@@ -57,8 +58,8 @@
 			   go-mode
 			   python-mode
 			   ;; lsp
-			   eglot
-			   eldoc-box
+			   ;;eglot
+			   ;;eldoc-box
 			   ) "Default packages")
 
 (setq package-selected-packages my/packages)

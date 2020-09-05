@@ -1,3 +1,8 @@
+;; File  : lisp/my-packages.el
+;; Author: liwenlong03 <liwenlong03>
+;; Date  : 2020.09.05
+;; Last Modified Date  : 2020.09.05
+;; Last Modified By  : liwenlong03 <liwenlong03>
 (require 'cl)
 (require 'use-package)
 
@@ -109,9 +114,8 @@
 
 ;;==========================================================================
 ;; auto save desktop status
-(desktop-save-mode 1)
+;;(desktop-save-mode 1)
 ;;==========================================================================
-; (add-to-list 'load-path "~/.emacs.d/packages/projectile") ; add snails to your load-path
 (require 'projectile)
 (require 'ivy)
 (require 'counsel-projectile)
@@ -154,11 +158,6 @@
   (message (concat "nil action: " (projectile-project-root)))
   (projectile-project-p (projectile-project-root))
   )
-(counsel-projectile-modify-action
-   'counsel-projectile-switch-project-action
-   '((add ("." dired
-           "open ‘dired’ at the root of the project")
-          1)))
 
 (defun lwl/goto-other-frame(path)
   ""
@@ -178,14 +177,28 @@
   )
 ; (setq projectile-switch-project-action 'lwl/projectile-after-switch-action)
 ; (add-hook 'projectile-find-file-hook 'lwl/projectile-after-switch-action)
-(add-hook 'projectile-after-switch-project-hook 'lwl/projectile-after-switch-action)
+(defun my-switch-project-hook ()
+  "Perform some action after switching Projectile projects."
+  (message "Project changed...")
+  ;; Do something interesting here...
+  ;;
+  ;; `projectile-current-project-files', and `projectile-current-project-dirs' can be used
+  ;; to get access to the new project's files, and directories.
+  )
+(add-hook 'projectile-after-switch-project-hook #'my-switch-project-hook)
 
+(counsel-projectile-modify-action
+   'counsel-projectile-switch-project-action
+   '((add ("." dired
+           "open ‘dired’ at the root of the project")
+          1)))
 ;;==========================================================================
-;;(add-hook 'projectile-after-switch-project-hook #'my-switch-project-hook)
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/packages/goenv"))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/packages/lwl/goenv"))
 (require 'goenv)
-(setq goenv-default-gopath (expand-file-name "~/work/mebs"))
-;;(goenv-activate (projectile-project-root))
+(defun gopath()
+  (interactive)
+  (goenv-activate (magit-toplevel))
+  )
 
 ;;==========================================================================
 ;; LSP
@@ -198,7 +211,7 @@
                 'rust-mode-hook
                 'python-mode-hook
                 'sh-mode-hook
-                'c-mode-common-hook
+               'c-mode-common-hook
                 'c-mode-hook
                 'c++-mode-hook
                 ))
@@ -208,15 +221,15 @@
 ;;(set eglot-put-doc-in-help-buffer nil)
 ;;(setq eglot-auto-display-help-buffer nil)
 ;;(dolist (hook (list
-;			   'go-mode-hook
-;			   'rust-mode-hook
-;			   'python-mode-hook
-;			   'sh-mode-hook
-;			   'c-mode-common-hook
-;			   'c-mode-hook
-;			   'c++-mode-hook
-;			   ))
-;  (add-hook hook '(lambda () (eglot-ensure))))
+;;			   'go-mode-hook
+;;			   'rust-mode-hook
+;;			   'python-mode-hook
+;;			   'sh-mode-hook
+;;			   'c-mode-common-hook
+;;			   'c-mode-hook
+;;			   'c++-mode-hook
+;;			   ))
+;;  (add-hook hook '(lambda () (eglot-ensure))))
 ;;==========================================================================
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/packages/awesome-tab"))
@@ -353,10 +366,23 @@
                 (remove-if-not 'buffer-file-name (buffer-list)))))
 ;;==========================================================================
 ;; company-ctags
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/packages/redguardtoo/company-ctags/"))
-(require 'company-ctags)
-(with-eval-after-load 'company
-  (company-ctags-auto-setup))
+;;(add-to-list 'load-path (expand-file-name "~/.emacs.d/packages/redguardtoo/company-ctags/"))
+;;(require 'company-ctags)
+;;(with-eval-after-load 'company
+;;  (company-ctags-auto-setup))
+
+;;==========================================================================
+;; plantuml
+ ;; Sample jar configuration
+(setq plantuml-jar-path (expand-file-name "~/.emacs.d/packages/plantuml.jar"))
+(setq plantuml-default-exec-mode 'jar)
+;; Enable plantuml-mode for PlantUML files
+(add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
+;;==========================================================================
+;; flymake-new
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/packages/lazyflymake"))
+(require 'lazyflymake)
+(add-hook 'prog-mode-hook #'lazyflymake-start)
 
 ;;==========================================================================
 ;; 文件末尾

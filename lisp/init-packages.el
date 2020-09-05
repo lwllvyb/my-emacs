@@ -1,3 +1,8 @@
+;; File              : lisp/init-packages.el
+;; Author            : liwenlong03 <liwenlong03>
+;; Date              : 2020.09.05
+;; Last Modified Date: 2020.09.05
+;; Last Modified By  : liwenlong03 <liwenlong03>
 ;;  __        __             __   ___
 ;; |__)  /\  /  ` |__/  /\  / _` |__
 ;; |    /~~\ \__, |  \ /~~\ \__> |___
@@ -26,8 +31,6 @@
 			   ripgrep
 			   magit
 			   evil-magit
-			   company
-			   company-go
 			   posframe
 			   ivy
 			   ivy-posframe
@@ -40,11 +43,11 @@
          treemacs-evil
          treemacs-projectile
          doom-modeline
-			   
 				;; theme
 			   srcery-theme
 			   ;; --- Auto-completion ---
 			   company
+			   company-go
 			   ;; --- Better Editor ---
 			   smooth-scrolling
 			   hungry-delete

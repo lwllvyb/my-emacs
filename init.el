@@ -78,4 +78,4 @@
  '(dired-use-ls-dired nil)
  '(package-selected-packages
    (quote
-    (counsel-etags graphviz-dot-mode doom-modeline ivy-xref yaml-mode markdown-mode treemacs-magit neotree treemacs-evil rainbow-delimiters highlight-parentheses treemacs ranger benchmark-init exec-path-from-shell evil evil-leader use-package dashboard ripgrep magit evil-magit company company-go posframe ivy ivy-posframe projectile counsel-projectile switch-window symbol-overlay all-the-icons srcery-theme company smooth-scrolling hungry-delete swiper counsel smartparens popwin org org-bullets go-mode python-mode eglot eldoc-box))))
+    (cider protobuf-mode plantuml-mode counsel-etags graphviz-dot-mode doom-modeline ivy-xref yaml-mode markdown-mode treemacs-magit neotree treemacs-evil rainbow-delimiters highlight-parentheses treemacs ranger benchmark-init exec-path-from-shell evil evil-leader use-package dashboard ripgrep magit evil-magit company company-go posframe ivy ivy-posframe projectile counsel-projectile switch-window symbol-overlay all-the-icons srcery-theme company smooth-scrolling hungry-delete swiper counsel smartparens popwin org org-bullets go-mode python-mode eldoc-box))))

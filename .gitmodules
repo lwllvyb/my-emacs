@@ -4,9 +4,6 @@
 [submodule "packages/all-the-icons.el"]
 	path = packages/all-the-icons.el
 	url = https://github.com/domtronn/all-the-icons.el
-[submodule "packages/goenv"]
-	path = packages/goenv
-	url = https://github.com/lwllvyb/goenv
 [submodule "awesome-pair"]
 	path = awesome-pair
 	url = https://github.com/manateelazycat/awesome-pair
@@ -19,3 +16,9 @@
 [submodule "packages/redguardtoo/company-ctags"]
 	path = packages/redguardtoo/company-ctags
 	url = https://github.com/redguardtoo/company-ctags
+[submodule "packages/lwl/goenv"]
+	path = packages/lwl/goenv
+	url = https://github.com/lwllvyb/goenv
+[submodule "packages/lazyflymake"]
+	path = packages/lazyflymake
+	url = https://github.com/redguardtoo/lazyflymake

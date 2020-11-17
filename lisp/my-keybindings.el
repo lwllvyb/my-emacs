@@ -5,14 +5,15 @@
   "pa" 'projectile-discover-projects-in-directory
   "pf" 'counsel-projectile-find-file
   "pp" 'projectile-switch-project
-  "s" 'projectile-ripgrep
   "pr" 'counsel-recentf
+  ;"s" 'projectile-ripgrep
+  "ps" 'color-rg-search-symbol-in-project
   "r" 'counsel-recentf
   "o"  'counsel-imenu
-  "r" 'xref-find-references
+  "fr" 'xref-find-references
   "fd" 'xref-find-definitions
-  "ff" 'counsel-find-file
-  "fp" 'switch-to-buffer
+  ;"f" 'counsel-find-file
+  ;"fp" 'switch-to-buffer
   "bd" 'kill-buffer-and-window
   "mm" 'counsel-bookmark
   "md" 'bookmark-delete
@@ -22,6 +23,10 @@
   "K" 'symbol-overlay-remove-all
   "a" 'org-agenda
   "t" 'goto-tmp
+  "nn" 'treemacs
+  "cc" 'evilnc-comment-or-uncomment-lines
+  "ww" 'toggle-maximize-buffer
+  "ee" 'org-edit-src-code
   )
 
 (global-set-key (kbd "C-x o") 'switch-window)

@@ -7,6 +7,10 @@
 (require 'use-package)
 
 ;;==========================================================================
+;; auto refresh file
+(global-auto-revert-mode t)
+;;==========================================================================
+;;==========================================================================
 (doom-modeline-mode 1)
 (setq doom-modeline-vcs-max-length 50)
 ;;==========================================================================
@@ -75,36 +79,35 @@
         (and func (funcall func))))
 ;;==========================================================================
 ;; dashboard
-; (require 'dashboard)
-; (dashboard-setup-startup-hook)
-; (use-package dashboard
-;   :ensure t
-;   :config
-;   (dashboard-setup-startup-hook))
-; (setq dashboard-startup-banner 3)
-; (setq dashboard-banner-logo-title "Welcome to Emacs Dashboard"
-;       dashboard-startup-banner  1
-;       dashboard-center-content t
-;       dashboard-show-shortcuts nil
-;       dashboard-items '((recents  . 10)
-;                         (bookmarks . 5)
-;                         (projects . 5))
-;
-;       dashboard-set-init-info t
-;       dashboard-set-file-icons centaur-icon
-;       dashboard-set-heading-icons centaur-icon
-;       dashboard-heading-icons '((recents   . "file-text")
-;                                 (bookmarks . "bookmark")
-;                                 (agenda    . "calendar")
-;                                 (projects  . "briefcase")
-;                                 (registers . "database"))
-;       )
-;
-; ;; Jump to the first section
-;       (dashboard-goto-recent-files)
+ (require 'dashboard)
+ (dashboard-setup-startup-hook)
+ (use-package dashboard
+   :ensure t
+   :config
+   (dashboard-setup-startup-hook))
+ (setq dashboard-startup-banner 3)
+ (setq dashboard-banner-logo-title "Welcome to Emacs Dashboard"
+       dashboard-startup-banner  1
+       dashboard-center-content t
+       dashboard-show-shortcuts nil
+       dashboard-items '((recents  . 10)
+                         (projects . 5))
 
-;;(setq dashboard-set-heading-icons t)
-;;(setq dashboard-set-file-icons t)
+       dashboard-set-init-info t
+       dashboard-set-file-icons centaur-icon
+       dashboard-set-heading-icons centaur-icon
+       dashboard-heading-icons '((recents   . "file-text")
+                                 (bookmarks . "bookmark")
+                                 (agenda    . "calendar")
+                                 (projects  . "briefcase")
+                                 (registers . "database"))
+       )
+
+ ;; Jump to the first section
+       (dashboard-goto-recent-files)
+
+(setq dashboard-set-heading-icons t)
+(setq dashboard-set-file-icons t)
 
 (load-theme 'srcery t)
 
@@ -195,9 +198,15 @@
 ;;==========================================================================
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/packages/lwl/goenv"))
 (require 'goenv)
+(defun my-nox-reconnect ()
+	(let* ((current-server (nox-current-server))
+         )
+        (nox-reconnect current-server 't)
+		))
 (defun gopath()
   (interactive)
   (goenv-activate (magit-toplevel))
+   (my-nox-reconnect)
   )
 
 ;;==========================================================================
@@ -242,6 +251,7 @@
 
 (require 'evil-magit)
 
+
 (add-hook 'after-init-hook 'global-company-mode)
 (require 'company)
 (require 'company-go)
@@ -249,26 +259,62 @@
 (setq company-idle-delay .2)                         ; decrease delay before autocompletion popup shows
 (setq company-echo-delay 0)                          ; remove annoying blinking
 (setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
+(custom-set-faces
+ '(company-preview
+   ((t (:foreground "darkgray" :underline t))))
+ '(company-preview-common
+   ((t (:inherit company-preview))))
+ '(company-tooltip
+   ((t (:background "lightgray" :foreground "black"))))
+ '(company-tooltip-selection
+   ((t (:background "steelblue" :foreground "white"))))
+ '(company-tooltip-common
+   ((((type x)) (:inherit company-tooltip :weight bold))
+    (t (:inherit company-tooltip))))
+ '(company-tooltip-common-selection
+   ((((type x)) (:inherit company-tooltip-selection :weight bold))
+    (t (:inherit company-tooltip-selection)))))
 
 (require 'switch-window)
 
 ;;==========================================================================
+;; org start
+(setq org-startup-folded nil)
 (require 'org)
 (setq org-src-fontify-natively t)
+(setq org-confirm-babel-evaluate 'nil)
+
 
 ;;==========================================================================
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 (setq inhibit-compacting-font-caches t)
 
+(defun org-insert-src-block (src-code-type)
+  "Insert a `SRC-CODE-TYPE' type source code block in org-mode."
+  (interactive
+   (let ((src-code-types
+          '("emacs-lisp" "python" "C" "sh" "java" "js" "clojure" "C++" "css"
+            "calc" "asymptote" "dot" "gnuplot" "ledger" "lilypond" "mscgen"
+            "octave" "oz" "plantuml" "R" "sass" "screen" "sql" "awk" "ditaa"
+            "haskell" "latex" "lisp" "matlab" "ocaml" "org" "perl" "ruby"
+            "scheme" "sqlite" "bash" "rust" "golang")))
+     (list (ido-completing-read "Source code type: " src-code-types))))
+  (progn
+    (newline-and-indent)
+    (insert (format "#+BEGIN_SRC %s\n" src-code-type))
+    (newline-and-indent)
+    (insert "#+END_SRC\n")
+    (previous-line 2)
+    (org-edit-src-code)))
 
 ;;==========================================================================
 ;; symbol-overlay
-(let ((map (make-sparse-keymap)))
-  (define-key map (kbd "n") 'symbol-overlay-jump-next)
-  (define-key map (kbd "p") 'symbol-overlay-jump-prev)
-  (setq symbol-overlay-map map))
-(setq symbol-overlay-map (make-sparse-keymap))
+;;(let ((map (make-sparse-keymap)))
+;;  (define-key map (kbd "n") 'symbol-overlay-jump-next)
+;;  (define-key map (kbd "p") 'symbol-overlay-jump-prev)
+;;  (setq symbol-overlay-map map))
+;;(setq symbol-overlay-map (make-sparse-keymap))
 
 ;;==========================================================================
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/packages/awesome-tab"))
@@ -383,6 +429,42 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/packages/lazyflymake"))
 (require 'lazyflymake)
 (add-hook 'prog-mode-hook #'lazyflymake-start)
+
+;;==========================================================================
+;;==========================================================================
+;; color-rg
+(add-to-list 'load-path "~/.emacs.d/packages/color-rg") ; add color-rg to your load-path
+(require 'color-rg)
+;;==========================================================================
+;; evil-nerd-commenter
+
+(require 'evil-nerd-commenter)
+
+;;==========================================================================
+;; window 放大缩小
+(defun toggle-maximize-buffer ()
+  "Maximize buffer"
+  (interactive)
+  (save-excursion
+    (if (and (= 1 (length (cl-remove-if
+                           (lambda (window)
+                             (window-parameter window 'no-delete-other-windows))
+                           (window-list))))
+             (assoc ?_ register-alist))
+        (jump-to-register ?_)
+      (progn
+        (window-configuration-to-register ?_)
+        (delete-other-windows)))))
+;;==========================================================================
+;; rust
+(rust-mode)
+(add-to-list 'load-path "~/.emacs.d/packages/ob-rust") ; add color-rg to your load-path
+(require 'ob-rust)
+;;==========================================================================
+;; yasnippet
+(use-package yasnippet 
+    :config (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")) 
+(yas-global-mode 1)
 
 ;;==========================================================================
 ;; 文件末尾

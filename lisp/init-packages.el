@@ -38,6 +38,7 @@
 			   counsel-projectile
 			   switch-window
 			   symbol-overlay
+               evil-nerd-commenter
          all-the-icons
          treemacs
          treemacs-evil
@@ -48,6 +49,7 @@
 			   ;; --- Auto-completion ---
 			   company
 			   company-go
+			   yasnippet
 			   ;; --- Better Editor ---
 			   smooth-scrolling
 			   hungry-delete

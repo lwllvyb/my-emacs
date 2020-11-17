@@ -22,3 +22,9 @@
 [submodule "packages/lazyflymake"]
 	path = packages/lazyflymake
 	url = https://github.com/redguardtoo/lazyflymake
+[submodule "packages/color-rg"]
+	path = packages/color-rg
+	url = https://github.com/manateelazycat/color-rg
+[submodule "packages/ob-rust"]
+	path = packages/ob-rust
+	url = //github.com/micanzhang/ob-rust

@@ -3,6 +3,8 @@
 ;; Date  : 2020.09.05
 ;; Last Modified Date  : 2020.09.05
 ;; Last Modified By  : liwenlong03 <liwenlong03>
+(define-prefix-command 'leader-key)
+(global-set-key (kbd "C-,") 'leader-key)
 (require 'cl)
 (require 'use-package)
 
@@ -20,96 +22,42 @@
 (show-paren-mode)
 (highlight-parentheses-mode)
 ;;==========================================================================
+;; disable
 (add-to-list 'load-path "~/.emacs.d/packages/awesome-pair") ; add awesome-pair to your load-path
-(require 'awesome-pair)
-(dolist (hook (list
-               'c-mode-common-hook
-               'c-mode-hook
-               'c++-mode-hook
-               'emacs-lisp-mode-hook
-               'lisp-interaction-mode-hook
-               'lisp-mode-hook
-               'sh-mode-hook
-               'makefile-gmake-mode-hook
-               'python-mode-hook
-               'go-mode-hook
-               'rust-mode-hook
-               'minibuffer-inactive-mode-hook
-               ))
-  (add-hook hook '(lambda () (awesome-pair-mode 1))))
-(define-key awesome-pair-mode-map (kbd "(") 'awesome-pair-open-round)
-(define-key awesome-pair-mode-map (kbd "[") 'awesome-pair-open-bracket)
-(define-key awesome-pair-mode-map (kbd "{") 'awesome-pair-open-curly)
-(define-key awesome-pair-mode-map (kbd ")") 'awesome-pair-close-round)
-(define-key awesome-pair-mode-map (kbd "]") 'awesome-pair-close-bracket)
-(define-key awesome-pair-mode-map (kbd "}") 'awesome-pair-close-curly)
-(define-key awesome-pair-mode-map (kbd "=") 'awesome-pair-equal)
-
-(define-key awesome-pair-mode-map (kbd "%") 'awesome-pair-match-paren)
-(define-key awesome-pair-mode-map (kbd "\"") 'awesome-pair-double-quote)
-
-(define-key awesome-pair-mode-map (kbd "SPC") 'awesome-pair-space)
-
-(define-key awesome-pair-mode-map (kbd "M-o") 'awesome-pair-backward-delete)
-(define-key awesome-pair-mode-map (kbd "C-d") 'awesome-pair-forward-delete)
-(define-key awesome-pair-mode-map (kbd "C-k") 'awesome-pair-kill)
-
-(define-key awesome-pair-mode-map (kbd "M-\"") 'awesome-pair-wrap-double-quote)
-(define-key awesome-pair-mode-map (kbd "M-[") 'awesome-pair-wrap-bracket)
-(define-key awesome-pair-mode-map (kbd "M-{") 'awesome-pair-wrap-curly)
-(define-key awesome-pair-mode-map (kbd "M-(") 'awesome-pair-wrap-round)
-(define-key awesome-pair-mode-map (kbd "M-)") 'awesome-pair-unwrap)
-
-(define-key awesome-pair-mode-map (kbd "M-p") 'awesome-pair-jump-right)
-(define-key awesome-pair-mode-map (kbd "M-n") 'awesome-pair-jump-left)
-(define-key awesome-pair-mode-map (kbd "M-:") 'awesome-pair-jump-out-pair-and-newline)
+;; 括号匹配，不再使用这个，转为使用smartparens
+(use-package awesome-pair
+  :disabled 
+  :load-path "~/.emacs.d/packages/awesome-pair" 
+  :config (dolist (hook (list 'c-mode-common-hook 'c-mode-hook 'c++-mode-hook 'java-mode-hook 'haskell-mode-hook 'emacs-lisp-mode-hook 'lisp-interaction-mode-hook 'lisp-mode-hook 'maxima-mode-hook 'ielm-mode-hook 'sh-mode-hook 'makefile-gmake-mode-hook 'php-mode-hook 'python-mode-hook 'js-mode-hook 'go-mode-hook 'qml-mode-hook 'jade-mode-hook 'css-mode-hook 'ruby-mode-hook 'coffee-mode-hook 'rust-mode-hook 'qmake-mode-hook 'lua-mode-hook 'swift-mode-hook 'minibuffer-inactive-mode-hook)) 
+            (add-hook hook '(lambda () 
+                              (awesome-pair-mode 1)))) 
+  :bind (:map awesome-pair-mode-map
+              ("(" . #'awesome-pair-open-round) 
+              ("(" . #'awesome-pair-open-round) 
+              ("[" . #'awesome-pair-open-bracket) 
+              ("{" . #'awesome-pair-open-curly) 
+              ("" . #'awesome-pair-close-round) 
+              ("]" . #'awesome-pair-close-bracket) 
+              ("}" . #'awesome-pair-close-curly) 
+              ("=" . #'awesome-pair-equal) 
+              ("%" . #'awesome-pair-match-paren) 
+              ("\"" . #'awesome-pair-double-quote) 
+              ("SPC" . #'awesome-pair-space) 
+              ("M-o" . #'awesome-pair-backward-delete) 
+              ("C-d" . #'awesome-pair-forward-delete) 
+              ("C-k" . #'awesome-pair-kill) 
+              ("M-\"" . #'awesome-pair-wrap-double-quote) 
+              ("M-[" . #'awesome-pair-wrap-bracket) 
+              ("M-{" . #'awesome-pair-wrap-curly) 
+              ("M-(" . #'awesome-pair-wrap-round) 
+              ("M-)" . #'awesome-pair-unwrap) 
+              ("M-p" . #'awesome-pair-jump-right) 
+              ("M-n" . #'awesome-pair-jump-left) 
+              ("M-:" . #'awesome-pair-jump-out-pair-and-newline)
+              ))
 ;;==========================================================================
-(defcustom centaur-logo (expand-file-name "logo.png" user-emacs-directory)
-  "Set Centaur logo. nil means official logo."
-  :group 'centaur
-  :type 'string)
-(defcustom centaur-icon (display-graphic-p)
-  "Display icons or not."
-  :group 'centaur
-  :type 'boolean)
-(defun dashboard-goto-recent-files ()
-      "Go to recent files."
-      (interactive)
-      (let ((func (local-key-binding "r")))
-        (and func (funcall func))))
+;;(load-theme 'tao-yin t)
 ;;==========================================================================
-;; dashboard
- (require 'dashboard)
- (dashboard-setup-startup-hook)
- (use-package dashboard
-   :ensure t
-   :config
-   (dashboard-setup-startup-hook))
- (setq dashboard-startup-banner 3)
- (setq dashboard-banner-logo-title "Welcome to Emacs Dashboard"
-       dashboard-startup-banner  1
-       dashboard-center-content t
-       dashboard-show-shortcuts nil
-       dashboard-items '((recents  . 10)
-                         (projects . 5))
-
-       dashboard-set-init-info t
-       dashboard-set-file-icons centaur-icon
-       dashboard-set-heading-icons centaur-icon
-       dashboard-heading-icons '((recents   . "file-text")
-                                 (bookmarks . "bookmark")
-                                 (agenda    . "calendar")
-                                 (projects  . "briefcase")
-                                 (registers . "database"))
-       )
-
- ;; Jump to the first section
-       (dashboard-goto-recent-files)
-
-(setq dashboard-set-heading-icons t)
-(setq dashboard-set-file-icons t)
-
-(load-theme 'srcery t)
 
 ;;(add-to-list 'load-path "~/.emacs.d/packages/snails") ; add snails to your load-path
 ;;(require 'snails)
@@ -220,7 +168,7 @@
                 'rust-mode-hook
                 'python-mode-hook
                 'sh-mode-hook
-               'c-mode-common-hook
+                'c-mode-common-hook
                 'c-mode-hook
                 'c++-mode-hook
                 ))
@@ -248,33 +196,125 @@
 (global-set-key (kbd "s-1") 'awesome-tab-backward-tab)
 (global-set-key (kbd "s-2") 'awesome-tab-forward-tab)
 
-
+;;==========================================================================
 (require 'evil-magit)
 
+;;==========================================================================
+;; (require 'company)
+;; (require 'company-go)
+;; (add-hook 'after-init-hook 'global-company-mode)
+;; (setq company-tooltip-limit 20)                      ; bigger popup window
+;; (setq company-idle-delay .2)                         ; decrease delay before autocompletion popup shows
+;; (setq company-echo-delay 0)                          ; remove annoying blinking
+;; (setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
+;; (custom-set-faces
+;;  '(company-preview
+;;    ((t (:foreground "darkgray" :underline t))))
+;;  '(company-preview-common
+;;    ((t (:inherit company-preview))))
+;;  '(company-tooltip
+;;    ((t (:background "lightgray" :foreground "black"))))
+;;  '(company-tooltip-selection
+;;    ((t (:background "steelblue" :foreground "white"))))
+;;  '(company-tooltip-common
+;;    ((((type x)) (:inherit company-tooltip :weight bold))
+;;     (t (:inherit company-tooltip))))
+;;  '(company-tooltip-common-selection
+;;    ((((type x)) (:inherit company-tooltip-selection :weight bold))
+;;     (t (:inherit company-tooltip-selection)))))
+;; (add-hook 'racer-mode-hook #'company-mode)
 
-(add-hook 'after-init-hook 'global-company-mode)
-(require 'company)
-(require 'company-go)
-(setq company-tooltip-limit 20)                      ; bigger popup window
-(setq company-idle-delay .2)                         ; decrease delay before autocompletion popup shows
-(setq company-echo-delay 0)                          ; remove annoying blinking
-(setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
-(custom-set-faces
- '(company-preview
-   ((t (:foreground "darkgray" :underline t))))
- '(company-preview-common
-   ((t (:inherit company-preview))))
- '(company-tooltip
-   ((t (:background "lightgray" :foreground "black"))))
- '(company-tooltip-selection
-   ((t (:background "steelblue" :foreground "white"))))
- '(company-tooltip-common
-   ((((type x)) (:inherit company-tooltip :weight bold))
-    (t (:inherit company-tooltip))))
- '(company-tooltip-common-selection
-   ((((type x)) (:inherit company-tooltip-selection :weight bold))
-    (t (:inherit company-tooltip-selection)))))
 
+;;==========================================================================
+;; 著名的Emacs补全框架
+    (use-package company
+      :diminish
+      :init
+      (setq company-dabbrev-downcase 0)
+      (setq company-idle-delay 0)
+      (setq company-minimum-prefix-length 2)
+      (setq company-tooltip-align-annotations t)
+      (setq company-tooltip-limit 20)                      ; bigger popup window
+      (setq company-echo-delay 0)                          ; remove annoying blinking
+      (setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
+      (setq company-backends
+            '(
+              ;; company-clang
+              ;; company-xcode
+              ;; company-dabbrev
+              ;; company-yasnippet
+              company-semantic
+              company-cmake
+              company-capf
+              company-files
+              (company-dabbrev-code
+               company-gtags
+               company-etags
+               company-keywords)))
+
+      :bind
+      (:map company-active-map
+            ("C-n" . company-select-next)
+            ("C-p" . company-select-previous))
+
+      :hook
+      (prog-mode . company-mode)
+      :config
+      (unbind-key "M-n" company-active-map)
+      (unbind-key "M-p" company-active-map))
+
+    (use-package company-statistics
+      :hook
+      (after-init . company-statistics-mode))
+
+    (use-package yasnippet
+      :diminish
+      :hook
+      (prog-mode . yas-minor-mode)
+      :config
+      (use-package yasnippet-snippets :ensure t)
+      (yas-reload-all)
+
+      :bind
+      (:map yas-minor-mode-map
+            ("TAB" . nil)))
+
+    (use-package company-posframe
+      :diminish
+      :init
+      (setq company-posframe-quickhelp-delay nil
+            company-posframe-quickhelp-show-header nil
+            company-posframe-show-metadata nil
+            company-posframe-show-indicator nil
+            company-posframe-show-params (list :internal-border-color "dark gray"
+                                               :internal-border-width 1))
+      :config
+      (company-posframe-mode 1)
+      (require 'desktop)
+      (push '(company-posframe-mode . nil)
+            desktop-minor-mode-table))
+
+    ;; (use-package company-box
+    ;;   :diminish
+    ;;   :init
+    ;;   (setq company-box-doc-enable nil)
+    ;;   (setq company-box-backends-colors
+    ;;         '((company-capf
+    ;;            .
+    ;;            (:all "dim gray" :selected (:background "#288dee" :foreground "white")))
+    ;;           (company-elisp
+    ;;            .
+    ;;            (:all "dim gray" :selected (:background "#288dee" :foreground "white")))
+    ;;           (company-yasnippet
+    ;;            .
+    ;;            (:all "dim gray" :selected (:background "#288dee" :foreground "white")))))
+    ;;   :hook (company-mode . company-box-mode)
+    ;;   :custom-face
+    ;;   (company-box-selection ((t (:inherit company-tooltip-selection :background "#288dee"))))
+    ;;   (company-box-annotation ((t (:inherit comapny-tooltip-annotation :foreground "blue")))))
+;; With use-package:
+
+;;==========================================================================
 (require 'switch-window)
 
 ;;==========================================================================
@@ -350,7 +390,6 @@
   ;; as well
   (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
 
-(global-set-key (kbd "M-x") 'counsel-M-x)
 (setq ivy-initial-inputs-alist nil)
 
 ;;==========================================================================
@@ -458,6 +497,14 @@
 ;;==========================================================================
 ;; rust
 (rust-mode)
+(add-hook 'rust-mode-hook
+          (lambda () (setq indent-tabs-mode nil)))
+(setq rust-format-on-save t)
+
+;; (setq flymake-rust-use-cargo nil)
+(require 'flymake-rust)
+(add-hook 'rust-mode-hook 'flymake-rust-load)
+
 (add-to-list 'load-path "~/.emacs.d/packages/ob-rust") ; add color-rg to your load-path
 (require 'ob-rust)
 ;;==========================================================================
@@ -466,6 +513,118 @@
     :config (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")) 
 (yas-global-mode 1)
 
+;;==========================================================================
+;; smartparents
+(require 'smartparens-config)
+;(smartparents-mode 1)
+;;==========================================================================
+(require 'org-download)
+
+;; Drag-and-drop to `dired`
+(add-hook 'dired-mode-hook 'org-download-enable)
+;;;###autoload
+(defun org-insert-image (event)
+  (interactive "e")
+  (x-focus-frame nil)
+  (let* ((payload (car (last event)))
+         (type (car payload))
+         (fromname (cadr payload))
+         (img-regexp "\\(gif\\|png\\|jp[e]?g\\)\\>")
+         (destname fromname)
+         img-dir
+         )
+    (when (file-exists-p "../img/")
+      (setq img-dir "../img/"))
+    (when (file-exists-p "./img/")
+      (setq img-dir "./img/"))
+    (when (and  (eq 'drag-n-drop (car event))
+                (eq 'file type)
+                (string-match img-regexp fromname)
+                img-dir)
+      (let ((filebasename (file-name-base (buffer-file-name)) ))
+        (setq destname (concat img-dir filebasename "-" (format-time-string "%Y-%m-%d-%H-%M-%S") "." (file-name-extension fromname)))
+        (rename-file fromname destname t))
+      (goto-char (nth 1 (event-start event)))
+      (insert (format "[[file:%s]]" (file-relative-name destname (file-name-directory (buffer-file-name))))))))
+;;==========================================================================
+;; Emacs下最好用的终端仿真器，需要编译库，默认不开启
+(use-package 
+  vterm
+  :commands (vterm)
+  :ensure t
+  :bind (:map leader-key
+              ("o t" . 'vterm)))
+;; 括号匹配
+(use-package 
+    smartparens
+	  :ensure t 
+	    :hook ('prog-mode . 'smartparens-global-mode))
+;; 有道词典，非常有用
+(use-package 
+  youdao-dictionary
+  :commands (youdao-dictionary-search-at-point-posframe)
+  :ensure t 
+  :config (setq url-automatic-caching t) 
+  (which-key-add-key-based-replacements "C-x y" "有道翻译") 
+  :bind (("C-x y t" . 'youdao-dictionary-search-at-point+) 
+         ("C-x y g" . 'youdao-dictionary-search-at-point-posframe) 
+         ("C-x y p" . 'youdao-dictionary-play-voice-at-point) 
+         ("C-x y r" . 'youdao-dictionary-search-and-replace) 
+         ("C-x y i" . 'youdao-doictionary-search-from-input)))
+
+;; 用posframe在dired模式下显示文件内容
+(use-package dired-posframe
+  :ensure t
+  :custom
+  (dired-posframe-size-limit (* 100 1024 1024))
+  :bind((:map dired-mode-map)
+		("C-*" . dired-posframe-mode)))
+;; 更改窗格布局
+(use-package rotate
+  :ensure t)
+
+;; 命令日志
+(use-package command-log-mode
+  :ensure t)
+(use-package flymake-rust
+  :ensure t
+  :hook ('rust-mode-hook 'flymake-rust-load))			 
+;; 增强了搜索功能
+(use-package swiper
+  :bind
+  (("C-s" . swiper)
+   ("C-r" . swiper)
+   ("C-c C-r" . ivy-resume)
+   ("M-x" . counsel-M-x)
+   ("C-x C-f" . counsel-find-file))
+  :config
+  (setq counsel-describe-function-function #'helpful-callable)
+  (setq counsel-describe-variable-function #'helpful-variable)
+  (progn
+    (ivy-mode 1)
+    (setq ivy-use-virtual-buffers t)
+    (setq ivy-display-style 'fancy)
+    (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)))
+
+;; 强大的字符跳转工具
+(use-package avy
+  :defer 0
+  :ensure t
+  :bind (("M-g :" . 'avy-goto-char)
+         ("M-g '" . 'avy-goto-char-2)
+         ("M-g \"" . 'avy-goto-char-timer)
+         ("M-g f" . 'avy-goto-line)
+         ("M-g w" . 'avy-goto-word-1)
+         ("M-g e" . 'avy-goto-word-0)))
+;;==========================================================================
+(use-package racer
+  :ensure t
+  :load-path "~/.emacs.d/packages/emacs-racer"
+  :hook ('rust-mode-hook #'racer-mode
+                         'racer-mode-hook #'eldoc-mode))
+(require 'rust-mode)
+(define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
+(setq company-tooltip-align-annotations t)
 ;;==========================================================================
 ;; 文件末尾
 (provide 'my-packages)

@@ -54,8 +54,10 @@
 ;; Package Management
 ;; -----------------------------------------------------------------
 (require 'init-packages)
+(require 'init-basic)
 (require 'my-packages)
 (require 'my-keybindings)
+(require 'init-ui)
 ; (custom-set-variables
 ;  ;; custom-set-variables was added by Custom.
 ;  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -70,6 +72,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(all-the-icons-blue ((t (:foreground "light green"))))
+ '(company-box-annotation ((t (:inherit comapny-tooltip-annotation :foreground "blue"))) t)
+ '(company-box-selection ((t (:inherit company-tooltip-selection :background "#288dee"))) t)
  '(company-preview ((t (:foreground "darkgray" :underline t))))
  '(company-preview-common ((t (:inherit company-preview))))
  '(company-tooltip ((t (:background "lightgray" :foreground "black"))))
@@ -81,7 +85,14 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("e1ef2d5b8091f4953fe17b4ca3dd143d476c106e221d92ded38614266cea3c8b" "bc836bf29eab22d7e5b4c142d201bcce351806b7c1f94955ccafab8ce5b20208" "dbade2e946597b9cda3e61978b5fcc14fa3afa2d3c4391d477bdaeff8f5638c5" "801a567c87755fe65d0484cb2bded31a4c5bb24fd1fe0ed11e6c02254017acb2" default)))
+ '(dired-posframe-size-limit 104857600 t)
  '(dired-use-ls-dired nil)
+ '(emojify-emojis-dir "~/.emacs.d/var/emojis")
  '(package-selected-packages
    (quote
-    (evil-smartparens yasnippet rust-mode go-complete evil-nerd-commenter cider protobuf-mode plantuml-mode counsel-etags graphviz-dot-mode doom-modeline ivy-xref yaml-mode markdown-mode treemacs-magit neotree treemacs-evil rainbow-delimiters highlight-parentheses treemacs ranger benchmark-init exec-path-from-shell evil evil-leader use-package dashboard ripgrep magit evil-magit company company-go posframe ivy ivy-posframe projectile counsel-projectile switch-window symbol-overlay all-the-icons srcery-theme company smooth-scrolling hungry-delete swiper counsel smartparens popwin org org-bullets go-mode python-mode eldoc-box))))
+    (company-statistics nyan-mode modus-operandi-theme tabbar centaur-tabs beacon which-key doom-themes gotest tao-theme yasnippet-snippets evil-smartparens yasnippet rust-mode go-complete evil-nerd-commenter cider protobuf-mode plantuml-mode counsel-etags graphviz-dot-mode doom-modeline ivy-xref yaml-mode markdown-mode treemacs-magit neotree treemacs-evil rainbow-delimiters highlight-parentheses treemacs ranger benchmark-init exec-path-from-shell evil evil-leader use-package dashboard ripgrep magit evil-magit company company-go posframe ivy ivy-posframe projectile counsel-projectile switch-window symbol-overlay all-the-icons srcery-theme company smooth-scrolling swiper counsel smartparens popwin org org-bullets go-mode python-mode eldoc-box)))
+ '(posframe-mouse-banish nil)
+ '(which-key-popup-type (quote side-window)))

@@ -36,5 +36,8 @@
 (global-set-key (kbd "C-k") #'windmove-up)
 (global-set-key (kbd "C-j") #'windmove-down)
 
+(define-prefix-command 'leader-key)
+(global-set-key (kbd "C-q") 'leader-key)
+
 ;; 文件末尾
 (provide 'my-keybindings)

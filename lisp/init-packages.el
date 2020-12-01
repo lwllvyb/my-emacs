@@ -9,13 +9,23 @@
 ;;                      __   ___        ___      ___
 ;; |\/|  /\  |\ |  /\  / _` |__   |\/| |__  |\ |  |
 ;; |  | /~~\ | \| /~~\ \__> |___  |  | |___ | \|  |
-(when (>= emacs-major-version 24)
-    (require 'package)
-    (package-initialize)
-    (setq package-archives 
-      	'(("melpa-cn" . "~/emacs_plugins/melpa/")
-       	("org-cn"   . "~/emacs_plugins/org/")
-       	("gnu-cn"   . "~/emacs_plugins/gnu/"))))
+(require 'package)
+
+(package-initialize) ;; You might already have this line
+(setq package-archives '(("gnu" . "http://mirrors.ustc.edu.cn/elpa/gnu/")
+                         ("melpa" . "http://mirrors.ustc.edu.cn/elpa/melpa/")
+                         ("melpa-stable" . "http://mirrors.ustc.edu.cn/elpa/melpa-stable/")
+                         ("org" . "http://mirrors.ustc.edu.cn/elpa/org/")))
+(unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+	  (package-install 'use-package))
+;; (when (>= emacs-major-version 24)
+;;     (require 'package)
+;;     (package-initialize)
+;;     (setq package-archives 
+;;       	'(("melpa-cn" . "~/emacs_plugins/melpa/")
+;;        	("org-cn"   . "~/emacs_plugins/org/")
+;;        	("gnu-cn"   . "~/emacs_plugins/gnu/"))))
 
 ;; cl - Common Lisp Extension
 (require 'cl)
@@ -46,6 +56,7 @@
          doom-modeline
 				;; theme
 			   srcery-theme
+			   tao-theme
 			   ;; --- Auto-completion ---
 			   company
 			   company-go
@@ -57,9 +68,11 @@
 			   counsel
 			   smartparens
 			   popwin
+			   flymake-rust
 			   ;; --- Major Mode ---
 			   org
 			   org-bullets
+			   org-download
 			   go-mode
 			   python-mode
 			   ;; lsp

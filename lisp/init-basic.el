@@ -112,7 +112,6 @@
 (setq-default indent-tabs-mode nil)
 ;; 制表符宽度
 (setq-default tab-width 4)
-
 ;; 高亮对应的括号
 (show-paren-mode 1)
 
@@ -134,3 +133,4 @@
 (cd "~/.emacs.d/")
 
 (provide 'init-basic)
+

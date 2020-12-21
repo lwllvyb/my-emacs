@@ -48,8 +48,6 @@
 ;;   (message "无法找到%s字体，你可以更换其他字体或安装它让这条消息消失." evan/en-font-name))
 
 
-;; 高亮当前行
-(global-hl-line-mode 1)
 
 ;; 切换buffer焦点时高亮动画
 (use-package beacon
@@ -363,6 +361,14 @@
    ("C-c 0" . centaur-tabs--kill-this-buffer-dont-ask)
    ("C-c B" . centaur-tabs-counsel-switch-group)))
 
+(use-package chocolate-theme
+  :ensure t
+  :config
+  (load-theme 'chocolate t))
+;; 高亮当前行
+(global-hl-line-mode 1)
+(set-face-background 'hl-line "#377d39")
+(set-face-foreground 'highlight nil)
 ;; (use-package fira-code-mode
 ;;   :ensure t
 ;;   :hook (prog-mode . fira-code-mode))

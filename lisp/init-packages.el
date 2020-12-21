@@ -12,13 +12,8 @@
 (require 'package)
 
 (package-initialize) ;; You might already have this line
-(setq package-archives '(("gnu" . "http://mirrors.ustc.edu.cn/elpa/gnu/")
-                         ("melpa" . "http://mirrors.ustc.edu.cn/elpa/melpa/")
-                         ("melpa-stable" . "http://mirrors.ustc.edu.cn/elpa/melpa-stable/")
-                         ("org" . "http://mirrors.ustc.edu.cn/elpa/org/")))
-(unless (package-installed-p 'use-package)
-    (package-refresh-contents)
-	  (package-install 'use-package))
+(setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
+						("melpa" . "http://elpa.emacs-china.org/melpa/")))
 ;; (when (>= emacs-major-version 24)
 ;;     (require 'package)
 ;;     (package-initialize)
@@ -49,7 +44,7 @@
 			   switch-window
 			   symbol-overlay
                evil-nerd-commenter
-         all-the-icons
+    all-the-icons
          treemacs
          treemacs-evil
          treemacs-projectile

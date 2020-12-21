@@ -56,8 +56,6 @@
               ("M-:" . #'awesome-pair-jump-out-pair-and-newline)
               ))
 ;;==========================================================================
-;;(load-theme 'tao-yin t)
-;;==========================================================================
 
 ;;(add-to-list 'load-path "~/.emacs.d/packages/snails") ; add snails to your load-path
 ;;(require 'snails)
@@ -198,101 +196,75 @@
 
 ;;==========================================================================
 (require 'evil-magit)
-
-;;==========================================================================
-;; (require 'company)
-;; (require 'company-go)
-;; (add-hook 'after-init-hook 'global-company-mode)
-;; (setq company-tooltip-limit 20)                      ; bigger popup window
-;; (setq company-idle-delay .2)                         ; decrease delay before autocompletion popup shows
-;; (setq company-echo-delay 0)                          ; remove annoying blinking
-;; (setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
-;; (custom-set-faces
-;;  '(company-preview
-;;    ((t (:foreground "darkgray" :underline t))))
-;;  '(company-preview-common
-;;    ((t (:inherit company-preview))))
-;;  '(company-tooltip
-;;    ((t (:background "lightgray" :foreground "black"))))
-;;  '(company-tooltip-selection
-;;    ((t (:background "steelblue" :foreground "white"))))
-;;  '(company-tooltip-common
-;;    ((((type x)) (:inherit company-tooltip :weight bold))
-;;     (t (:inherit company-tooltip))))
-;;  '(company-tooltip-common-selection
-;;    ((((type x)) (:inherit company-tooltip-selection :weight bold))
-;;     (t (:inherit company-tooltip-selection)))))
-;; (add-hook 'racer-mode-hook #'company-mode)
-
-
 ;;==========================================================================
 ;; 著名的Emacs补全框架
-    (use-package company
-      :diminish
-      :init
-      (setq company-dabbrev-downcase 0)
-      (setq company-idle-delay 0)
-      (setq company-minimum-prefix-length 2)
-      (setq company-tooltip-align-annotations t)
-      (setq company-tooltip-limit 20)                      ; bigger popup window
-      (setq company-echo-delay 0)                          ; remove annoying blinking
-      (setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
-      (setq company-backends
-            '(
-              ;; company-clang
-              ;; company-xcode
-              ;; company-dabbrev
-              ;; company-yasnippet
-              company-semantic
-              company-cmake
-              company-capf
-              company-files
-              (company-dabbrev-code
-               company-gtags
-               company-etags
-               company-keywords)))
+;;     (use-package company
+;;       :diminish
+;;       :init
+;;       (setq company-dabbrev-downcase 0)
+;;       (setq company-idle-delay 0)
+;;       (setq company-minimum-prefix-length 2)
+;;       (setq company-tooltip-align-annotations t)
+;;       (setq company-tooltip-limit 20)                      ; bigger popup window
+;;       (setq company-echo-delay 0)                          ; remove annoying blinking
+;;       (setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
+;;       (setq company-backends
+;;             '(
+;;               ;; company-clang
+;;               ;; company-xcode
+;;               ;; company-dabbrev
+;;               ;; company-yasnippet
+;;               company-semantic
+;;               company-cmake
+;;               company-capf
+;;               company-files
+;;               (company-dabbrev-code
+;;                company-gtags
+;;                company-etags
+;;                company-keywords)))
 
-      :bind
-      (:map company-active-map
-            ("C-n" . company-select-next)
-            ("C-p" . company-select-previous))
+;;       :bind
+;;       (:map company-active-map
+;;             ("C-n" . company-select-next)
+;;             ("C-p" . company-select-previous))
 
-      :hook
-      (prog-mode . company-mode)
-      :config
-      (unbind-key "M-n" company-active-map)
-      (unbind-key "M-p" company-active-map))
+;;       :hook
+;;       (prog-mode . company-mode)
+;;       :config
+;;       (unbind-key "M-n" company-active-map)
+;;       (unbind-key "M-p" company-active-map))
 
-    (use-package company-statistics
-      :hook
-      (after-init . company-statistics-mode))
+;;     (use-package company-statistics
+;;       :hook
+;;       (after-init . company-statistics-mode))
 
-    (use-package yasnippet
-      :diminish
-      :hook
-      (prog-mode . yas-minor-mode)
-      :config
-      (use-package yasnippet-snippets :ensure t)
-      (yas-reload-all)
+;;     (use-package yasnippet
+;;       :diminish
+;;       :hook
+;;       (prog-mode . yas-minor-mode)
+;;       :config
+;;       (use-package yasnippet-snippets :ensure t)
+;;       (yas-reload-all)
 
-      :bind
-      (:map yas-minor-mode-map
-            ("TAB" . nil)))
+;;       :bind
+;;       (:map yas-minor-mode-map
+;;             ("TAB" . nil)))
 
-    (use-package company-posframe
-      :diminish
-      :init
-      (setq company-posframe-quickhelp-delay nil
-            company-posframe-quickhelp-show-header nil
-            company-posframe-show-metadata nil
-            company-posframe-show-indicator nil
-            company-posframe-show-params (list :internal-border-color "dark gray"
-                                               :internal-border-width 1))
-      :config
-      (company-posframe-mode 1)
-      (require 'desktop)
-      (push '(company-posframe-mode . nil)
-            desktop-minor-mode-table))
+;; (use-package company-posframe
+;;   :load-path "~/.emacs.d/packages/company-posframe"
+;;   :diminish
+;;   :init
+;;   (setq company-posframe-quickhelp-delay nil
+;; 		company-posframe-quickhelp-show-header nil
+;; 		company-posframe-show-metadata nil
+;; 		company-posframe-show-indicator nil
+;; 		company-posframe-show-params (list :internal-border-color "dark gray"
+;; 										   :internal-border-width 1))
+;;   :config
+;;   (company-posframe-mode 1)
+;;   (require 'desktop)
+;;   (push '(company-posframe-mode . nil)
+;; 		desktop-minor-mode-table))
 
     ;; (use-package company-box
     ;;   :diminish
@@ -355,6 +327,8 @@
 ;;  (define-key map (kbd "p") 'symbol-overlay-jump-prev)
 ;;  (setq symbol-overlay-map map))
 ;;(setq symbol-overlay-map (make-sparse-keymap))
+;; symbol-overlay
+;;;  a highlight-symbol replacement.
 
 ;;==========================================================================
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/packages/awesome-tab"))
@@ -450,13 +424,6 @@
           (delq (current-buffer)
                 (remove-if-not 'buffer-file-name (buffer-list)))))
 ;;==========================================================================
-;; company-ctags
-;;(add-to-list 'load-path (expand-file-name "~/.emacs.d/packages/redguardtoo/company-ctags/"))
-;;(require 'company-ctags)
-;;(with-eval-after-load 'company
-;;  (company-ctags-auto-setup))
-
-;;==========================================================================
 ;; plantuml
  ;; Sample jar configuration
 (setq plantuml-jar-path (expand-file-name "~/.emacs.d/packages/plantuml.jar"))
@@ -465,9 +432,12 @@
 (add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
 ;;==========================================================================
 ;; flymake-new
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/packages/lazyflymake"))
-(require 'lazyflymake)
-(add-hook 'prog-mode-hook #'lazyflymake-start)
+;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/packages/lazyflymake"))
+;; (require 'lazyflymake)
+;; (add-hook 'prog-mode-hook #'lazyflymake-start)
+;; ;; (setq flymake-rust-use-cargo nil)
+;; (require 'flymake-rust)
+;; (add-hook 'rust-mode-hook 'flymake-rust-load)
 
 ;;==========================================================================
 ;;==========================================================================
@@ -501,9 +471,6 @@
           (lambda () (setq indent-tabs-mode nil)))
 (setq rust-format-on-save t)
 
-;; (setq flymake-rust-use-cargo nil)
-(require 'flymake-rust)
-(add-hook 'rust-mode-hook 'flymake-rust-load)
 
 (add-to-list 'load-path "~/.emacs.d/packages/ob-rust") ; add color-rg to your load-path
 (require 'ob-rust)
@@ -617,14 +584,23 @@
          ("M-g w" . 'avy-goto-word-1)
          ("M-g e" . 'avy-goto-word-0)))
 ;;==========================================================================
+(use-package rust-mode
+  :config
+  (progn
+    (define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)))
 (use-package racer
-  :ensure t
   :load-path "~/.emacs.d/packages/emacs-racer"
-  :hook ('rust-mode-hook #'racer-mode
-                         'racer-mode-hook #'eldoc-mode))
-(require 'rust-mode)
-(define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
-(setq company-tooltip-align-annotations t)
+  :after rust-mode
+  :hook
+  (rust-mode . racer-mode)
+  (racer-mode . eldoc-mode)
+  (racer-mode . company-mode)
+  :custom
+  (company-tooltip-align-annotations t))
+(use-package company-racer
+  :after racer-mode
+  :config
+  (add-to-list 'company-backends 'company-racer))
 ;;==========================================================================
 ;; 文件末尾
 (provide 'my-packages)

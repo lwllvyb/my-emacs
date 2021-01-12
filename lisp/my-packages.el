@@ -700,5 +700,24 @@
   ;; If you need setup indicator, see `meow-indicator' for customizing by hand.
 ;;  (meow-setup-indicator))
 ;;==========================================================================
+;; my project
+
+(defun lwl/switch-project-other-frame (&optional default-action)
+  "Switch project.
+Optional argument DEFAULT-ACTION is the key, function, name, or
+index in the list `counsel-projectile-switch-project-action' (1
+for the first action, etc) of the action to set as default."
+  (interactive)
+  (ivy-read (projectile-prepend-project-name "Switch to project: ")
+            (if counsel-projectile-remove-current-project
+                (projectile-relevant-known-projects)
+              projectile-known-projects)
+            :preselect (and (projectile-project-p)
+                            (abbreviate-file-name (projectile-project-root)))
+            :action (lambda(project)
+                      (progn (select-frame (make-frame))
+                             (dired project)))
+            :require-match t))
+;;==========================================================================
 ;; 文件末尾
 (provide 'my-packages)

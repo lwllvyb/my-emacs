@@ -33,19 +33,19 @@
 
 (delete-selection-mode 1)
 
-(if (featurep 'cocoa)
-    (progn
-      (setq ns-use-native-fullscreen nil)
-      (setq ns-use-fullscreen-animation nil)
+;; (if (featurep 'cocoa)
+;;     (progn
+;;       (setq ns-use-native-fullscreen nil)
+;;       (setq ns-use-fullscreen-animation nil)
 
-      (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
+;;       (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
 
-      (run-at-time "2sec" nil
-                   (lambda ()
-                     (toggle-frame-fullscreen)
-                     )))
-  (require 'fullscreen)
-  (fullscreen))
+;;       (run-at-time "2sec" nil
+;;                    (lambda ()
+;;                      (toggle-frame-fullscreen)
+;;                      )))
+;;   (require 'fullscreen)
+;;   (fullscreen))
 
 
 ;; Package Management
@@ -92,6 +92,6 @@
  '(emojify-emojis-dir "~/.emacs.d/var/emojis")
  '(package-selected-packages
    (quote
-    (chocolate-theme all-the-icons-ivy-rich shell-command+ company-statistics nyan-mode modus-operandi-theme tabbar centaur-tabs beacon which-key doom-themes gotest tao-theme yasnippet-snippets evil-smartparens yasnippet rust-mode go-complete evil-nerd-commenter cider protobuf-mode plantuml-mode counsel-etags graphviz-dot-mode doom-modeline ivy-xref yaml-mode markdown-mode treemacs-magit neotree treemacs-evil rainbow-delimiters highlight-parentheses treemacs ranger benchmark-init exec-path-from-shell evil evil-leader use-package dashboard ripgrep magit evil-magit company company-go posframe ivy ivy-posframe projectile counsel-projectile switch-window symbol-overlay all-the-icons srcery-theme company smooth-scrolling swiper counsel smartparens popwin org org-bullets go-mode python-mode eldoc-box)))
+    (meow chocolate-theme all-the-icons-ivy-rich shell-command+ company-statistics nyan-mode modus-operandi-theme tabbar centaur-tabs beacon which-key doom-themes gotest tao-theme yasnippet-snippets evil-smartparens yasnippet rust-mode go-complete evil-nerd-commenter cider protobuf-mode plantuml-mode counsel-etags graphviz-dot-mode doom-modeline ivy-xref yaml-mode markdown-mode treemacs-magit neotree treemacs-evil rainbow-delimiters highlight-parentheses treemacs ranger benchmark-init exec-path-from-shell evil evil-leader use-package dashboard ripgrep magit evil-magit company company-go posframe ivy ivy-posframe projectile counsel-projectile switch-window symbol-overlay all-the-icons srcery-theme company smooth-scrolling swiper counsel smartparens popwin org org-bullets go-mode python-mode eldoc-box)))
  '(posframe-mouse-banish nil)
  '(which-key-popup-type (quote side-window)))

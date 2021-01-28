@@ -131,6 +131,10 @@
 (use-package hungry-delete
   :ensure t
   :hook ('prog-mode . 'global-hungry-delete-mode))
+;; 外部修改之后，自动更新
+(use-package autorevert
+  :ensure nil
+  :hook (after-init . global-auto-revert-mode))
 
 ;; 默认目录为~/.emacs.d/
 (cd "~/.emacs.d/")

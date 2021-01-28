@@ -718,6 +718,58 @@ for the first action, etc) of the action to set as default."
                       (progn (select-frame (make-frame))
                              (dired project)))
             :require-match t))
+
+;; persp project
+(setq projectile-switch-project-action 'projectile-dired)
+(defun lwl/open-project-other-frame ()
+  "Switch to a project or perspective we have visited before.
+If the perspective of corresponding project does not exist, this
+function will call `persp-switch' to create one and switch to
+that before `projectile-switch-project' invokes
+`projectile-switch-project-action'.
+
+Otherwise, this function calls `persp-switch' to switch to an
+existing perspective of the project unless we're already in that
+perspective."
+  (interactive) 
+  (ivy-read (projectile-prepend-project-name "Switch to project: ")
+            (if counsel-projectile-remove-current-project
+                (projectile-relevant-known-projects)
+              projectile-known-projects)
+            :preselect (and (projectile-project-p)
+                            (abbreviate-file-name (projectile-project-root)))
+            :action (lambda(project-to-switch)
+                      (let* ((name (or projectile-project-name
+                                    (funcall projectile-project-name-function project-to-switch)))
+                            (persp (gethash name (perspectives-hash))))
+                        (cond
+                        ;; project-specific perspective already exists
+                         ((and persp (not (equal persp (persp-curr))))
+                          (select-frame (make-frame))
+                          (persp-switch name)
+                          (message "open %s %s" project-to-switch persp)
+                          (message "persp-curr %s" (persp-curr))
+                          )
+                        ;; project-specific perspective doesn't exist
+                        ((not persp)
+                         (let ((frame (selected-frame)))
+                            (select-frame (make-frame))
+                            (persp-switch name)
+                            ;;(dired project-to-switch)
+                            (projectile-switch-project-by-name project-to-switch)
+                            ;; Clean up if we switched to a new frame. `helm' for one allows finding
+                            ;; files in new frames so this is a real possibility.
+                            ;;(when (not (equal frame (selected-frame)))
+                            ;;(with-selected-frame frame
+                            ;;    (persp-kill name))))))))
+                            )))))
+            :require-match t))
+(defun lwl/new-buffer()
+  "Create a new frame with a new empty buffer."
+  (interactive)
+  (let ((buffer (get-buffer-create "untitled")))
+    (set-buffer-major-mode  buffer)
+    (display-buffer buffer '(display-buffer-pop-up-window . nil))))
 ;;==========================================================================
 ;; 文件末尾
 (provide 'my-packages)

@@ -36,7 +36,7 @@
 
 ;; 选中文本后输入会覆盖
 (add-hook 'after-init-hook
-		  (lambda () (delete-selection-mode +1)))
+          (lambda () (delete-selection-mode +1)))
 
 
 ;; 关闭GUI功能
@@ -67,7 +67,7 @@
 (setq ring-bell-function 'ignore blink-cursor-mode nil)
 
 ;; 任何地方都使用UTF-8
-(set-charset-priority 'unicode) 
+(set-charset-priority 'unicode)
 (setq locale-coding-system   'utf-8)    ; pretty
 (set-terminal-coding-system  'utf-8)    ; pretty
 (set-keyboard-coding-system  'utf-8)    ; pretty
@@ -103,10 +103,10 @@
 (setq-default fill-column 80)
 
 ;; 让'_'被视为单词的一部分
-(add-hook 'after-change-major-mode-hook (lambda () 
+(add-hook 'after-change-major-mode-hook (lambda ()
                                           (modify-syntax-entry ?_ "w")))
 ;; "-" 同上)
-(add-hook 'after-change-major-mode-hook (lambda () 
+(add-hook 'after-change-major-mode-hook (lambda ()
                                           (modify-syntax-entry ?- "w")))
 ;; 允许插入制表符
 (setq-default indent-tabs-mode nil)
@@ -115,6 +115,9 @@
 ;; 高亮对应的括号
 (show-paren-mode 1)
 
+;;自动清除行位空格
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+(add-hook 'before-save-hook 'whitespace-cleanup)
 ;; 键位提示
 (use-package which-key
   :ensure t
@@ -133,4 +136,3 @@
 (cd "~/.emacs.d/")
 
 (provide 'init-basic)
-

@@ -34,3 +34,6 @@
 [submodule "packages/snails"]
 	path = packages/snails
 	url = https://github.com/manateelazycat/snails
+[submodule "packages/lazycat-theme"]
+	path = packages/lazycat-theme
+	url = https://github.com/manateelazycat/lazycat-theme.git

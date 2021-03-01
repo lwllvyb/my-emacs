@@ -37,3 +37,9 @@
 [submodule "packages/lazycat-theme"]
 	path = packages/lazycat-theme
 	url = https://github.com/manateelazycat/lazycat-theme.git
+[submodule "packages/lwl/highlight-parentheses.el"]
+	path = packages/lwl/highlight-parentheses.el
+	url = https://github.com/lwllvyb/highlight-parentheses.el
+[submodule "packages/lwl/evil-collection"]
+	path = packages/lwl/evil-collection
+	url = https://github.com/lwllvyb/evil-collection

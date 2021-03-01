@@ -16,11 +16,28 @@
 (doom-modeline-mode 1)
 (setq doom-modeline-vcs-max-length 50)
 ;;==========================================================================
-(evil-mode 1)
-(global-evil-leader-mode)
+(use-package evil
+  :ensure t
+  :init
+  (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
+  (setq evil-want-keybinding nil)
+  :config
+  (evil-mode 1))
+(use-package evil-leader
+  :config
+  (global-evil-leader-mode))
+(use-package evil-collection
+  :load-path "~/.emacs.d/packages/lwl/evil-collection"
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init))
 ;;==========================================================================
 (show-paren-mode)
-(highlight-parentheses-mode)
+(use-package highlight-parentheses
+  :load-path "~/.emacs.d/packages/lwl/highlight-parentheses.el"
+  :config 
+  (highlight-parentheses-mode) )
 ;;==========================================================================
 ;; disable
 (add-to-list 'load-path "~/.emacs.d/packages/awesome-pair") ; add awesome-pair to your load-path
@@ -196,7 +213,7 @@
 (global-set-key (kbd "s-2") 'awesome-tab-forward-tab)
 
 ;;==========================================================================
-(require 'evil-magit)
+
 ;;==========================================================================
 ;; 著名的Emacs补全框架
 ;;     (use-package company
@@ -467,10 +484,10 @@
         (delete-other-windows)))))
 ;;==========================================================================
 ;; rust
-(rust-mode)
-(add-hook 'rust-mode-hook
-          (lambda () (setq indent-tabs-mode nil)))
-(setq rust-format-on-save t)
+;;(rust-mode)
+;;(add-hook 'rust-mode-hook
+;;          (lambda () (setq indent-tabs-mode nil)))
+;;(setq rust-format-on-save t)
 
 
 (add-to-list 'load-path "~/.emacs.d/packages/ob-rust") ; add color-rg to your load-path
@@ -601,6 +618,7 @@
 (use-package company-racer
   :after racer-mode
   :config
+  (setq rust-format-on-save t)
   (add-to-list 'company-backends 'company-racer))
 ;;==========================================================================
 (defun meow-setup ()

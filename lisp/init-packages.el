@@ -31,25 +31,27 @@
 			   exec-path-from-shell
 			   evil
 			   evil-leader
+               evil-nerd-commenter
 			   use-package
 			   dashboard
 			   ripgrep
 			   magit
-			   evil-magit
+			   ;;evil-magit
 			   posframe
 			   ivy
 			   ivy-posframe
-			   projectile
-			   counsel-projectile
 			   switch-window
 			   symbol-overlay
-               evil-nerd-commenter
-    all-the-icons
-         treemacs
-         treemacs-evil
-         treemacs-projectile
-         doom-modeline
-				;; theme
+               ;; project
+			   projectile
+			   counsel-projectile
+               ;; ui
+               all-the-icons
+               treemacs
+               treemacs-evil
+               treemacs-projectile
+			   ;; theme
+               doom-modeline
 			   srcery-theme
 			   tao-theme
 			   ;; --- Auto-completion ---
@@ -70,6 +72,7 @@
 			   org-download
 			   go-mode
 			   python-mode
+               rust-mode
 			   ;; lsp
 			   ;;eglot
 			   ;;eldoc-box

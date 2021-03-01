@@ -1,4 +1,4 @@
-(package-initialize)
+(when (version< emacs-version "27.0") (package-initialize))
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
@@ -55,7 +55,7 @@
 (require 'my-packages)
 (require 'my-keybindings)
 (require 'init-ui)
-(require 'init-company)
+;;(require 'init-company)
 ; (custom-set-variables
 ;  ;; custom-set-variables was added by Custom.
 ;  ;; If you edit it by hand, you could mess it up, so be careful.

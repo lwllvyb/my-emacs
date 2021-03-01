@@ -27,7 +27,7 @@
 	url = https://github.com/manateelazycat/color-rg
 [submodule "packages/ob-rust"]
 	path = packages/ob-rust
-	url = //github.com/micanzhang/ob-rust
+	url = https://github.com/micanzhang/ob-rust
 [submodule "packages/emacs-chocolate-theme"]
 	path = packages/emacs-chocolate-theme
 	url = https://github.com/SavchenkoValeriy/emacs-chocolate-theme

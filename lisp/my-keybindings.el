@@ -35,6 +35,9 @@
 (global-set-key (kbd "C-l") #'windmove-right)
 (global-set-key (kbd "C-k") #'windmove-up)
 (global-set-key (kbd "C-j") #'windmove-down)
+(global-set-key (kbd "M-1") #'awesome-tab-backward)
+(global-set-key (kbd "M-2") #'awesome-tab-forward)
+
 
 ;; 字体调整
 (global-set-key (kbd "C-=") 'text-scale-increase)

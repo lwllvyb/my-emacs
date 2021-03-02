@@ -9,6 +9,7 @@
 
 ;; CODE:
 
+(setq select-enable-primary t)
 ;; yes-or-no-p to y-or-n-p
 (fset 'yes-or-no-p 'y-or-n-p)
 ;; 设置缓存文件/杂七杂八的文件存放的地址

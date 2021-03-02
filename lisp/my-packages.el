@@ -12,6 +12,7 @@
 ;; auto refresh file
 (global-auto-revert-mode t)
 ;;==========================================================================
+(require 'org-tempo)
 ;;==========================================================================
 (doom-modeline-mode 1)
 (setq doom-modeline-vcs-max-length 50)
@@ -36,40 +37,40 @@
 (show-paren-mode)
 (use-package highlight-parentheses
   :load-path "~/.emacs.d/packages/lwl/highlight-parentheses.el"
-  :config 
+  :config
   (highlight-parentheses-mode) )
 ;;==========================================================================
 ;; disable
 (add-to-list 'load-path "~/.emacs.d/packages/awesome-pair") ; add awesome-pair to your load-path
 ;; 括号匹配，不再使用这个，转为使用smartparens
 (use-package awesome-pair
-  :disabled 
-  :load-path "~/.emacs.d/packages/awesome-pair" 
-  :config (dolist (hook (list 'c-mode-common-hook 'c-mode-hook 'c++-mode-hook 'java-mode-hook 'haskell-mode-hook 'emacs-lisp-mode-hook 'lisp-interaction-mode-hook 'lisp-mode-hook 'maxima-mode-hook 'ielm-mode-hook 'sh-mode-hook 'makefile-gmake-mode-hook 'php-mode-hook 'python-mode-hook 'js-mode-hook 'go-mode-hook 'qml-mode-hook 'jade-mode-hook 'css-mode-hook 'ruby-mode-hook 'coffee-mode-hook 'rust-mode-hook 'qmake-mode-hook 'lua-mode-hook 'swift-mode-hook 'minibuffer-inactive-mode-hook)) 
-            (add-hook hook '(lambda () 
-                              (awesome-pair-mode 1)))) 
+  :disabled
+  :load-path "~/.emacs.d/packages/awesome-pair"
+  :config (dolist (hook (list 'c-mode-common-hook 'c-mode-hook 'c++-mode-hook 'java-mode-hook 'haskell-mode-hook 'emacs-lisp-mode-hook 'lisp-interaction-mode-hook 'lisp-mode-hook 'maxima-mode-hook 'ielm-mode-hook 'sh-mode-hook 'makefile-gmake-mode-hook 'php-mode-hook 'python-mode-hook 'js-mode-hook 'go-mode-hook 'qml-mode-hook 'jade-mode-hook 'css-mode-hook 'ruby-mode-hook 'coffee-mode-hook 'rust-mode-hook 'qmake-mode-hook 'lua-mode-hook 'swift-mode-hook 'minibuffer-inactive-mode-hook))
+            (add-hook hook '(lambda ()
+                              (awesome-pair-mode 1))))
   :bind (:map awesome-pair-mode-map
-              ("(" . #'awesome-pair-open-round) 
-              ("(" . #'awesome-pair-open-round) 
-              ("[" . #'awesome-pair-open-bracket) 
-              ("{" . #'awesome-pair-open-curly) 
-              ("" . #'awesome-pair-close-round) 
-              ("]" . #'awesome-pair-close-bracket) 
-              ("}" . #'awesome-pair-close-curly) 
-              ("=" . #'awesome-pair-equal) 
-              ("%" . #'awesome-pair-match-paren) 
-              ("\"" . #'awesome-pair-double-quote) 
-              ("SPC" . #'awesome-pair-space) 
-              ("M-o" . #'awesome-pair-backward-delete) 
-              ("C-d" . #'awesome-pair-forward-delete) 
-              ("C-k" . #'awesome-pair-kill) 
-              ("M-\"" . #'awesome-pair-wrap-double-quote) 
-              ("M-[" . #'awesome-pair-wrap-bracket) 
-              ("M-{" . #'awesome-pair-wrap-curly) 
-              ("M-(" . #'awesome-pair-wrap-round) 
-              ("M-)" . #'awesome-pair-unwrap) 
-              ("M-p" . #'awesome-pair-jump-right) 
-              ("M-n" . #'awesome-pair-jump-left) 
+              ("(" . #'awesome-pair-open-round)
+              ("(" . #'awesome-pair-open-round)
+              ("[" . #'awesome-pair-open-bracket)
+              ("{" . #'awesome-pair-open-curly)
+              ("" . #'awesome-pair-close-round)
+              ("]" . #'awesome-pair-close-bracket)
+              ("}" . #'awesome-pair-close-curly)
+              ("=" . #'awesome-pair-equal)
+              ("%" . #'awesome-pair-match-paren)
+              ("\"" . #'awesome-pair-double-quote)
+              ("SPC" . #'awesome-pair-space)
+              ("M-o" . #'awesome-pair-backward-delete)
+              ("C-d" . #'awesome-pair-forward-delete)
+              ("C-k" . #'awesome-pair-kill)
+              ("M-\"" . #'awesome-pair-wrap-double-quote)
+              ("M-[" . #'awesome-pair-wrap-bracket)
+              ("M-{" . #'awesome-pair-wrap-curly)
+              ("M-(" . #'awesome-pair-wrap-round)
+              ("M-)" . #'awesome-pair-unwrap)
+              ("M-p" . #'awesome-pair-jump-right)
+              ("M-n" . #'awesome-pair-jump-left)
               ("M-:" . #'awesome-pair-jump-out-pair-and-newline)
               ))
 ;;==========================================================================
@@ -107,14 +108,14 @@
   (make-directory desktop-project-dir t)
   (setq desktop-project-file (concat desktop-project-dir ".emacs.desktop"))
   (message (concat "before:" desktop-project-file))
-  (cond 
-	((file-exists-p desktop-project-file)
-		(message (concat "exist:" desktop-project-file))
-		)
-	(t 
-		(desktop-save desktop-project-dir)
-		)
-	)
+  (cond
+    ((file-exists-p desktop-project-file)
+        (message (concat "exist:" desktop-project-file))
+        )
+    (t
+        (desktop-save desktop-project-dir)
+        )
+    )
   (message (concat "after:" desktop-project-dir))
   (desktop-read desktop-project-file)
 
@@ -127,16 +128,16 @@
 
 (defun lwl/goto-other-frame(path)
   ""
-  	(interactive)
-	(let* ((name (file-name-nondirectory path))
+    (interactive)
+    (let* ((name (file-name-nondirectory path))
            (b (get-buffer name))
            (w (get-buffer-window name)))
-	  (if b
-		(progn
+      (if b
+        (progn
                  (if w
                      (switch-to-buffer b)
                    (switch-to-buffer-other-frame b 'norecord)))
-		(switch-to-buffer-other-frame (find-file path)))))
+        (switch-to-buffer-other-frame (find-file path)))))
 (defun goto-tmp()
   (interactive)
   (lwl/goto-other-frame "~/work/tmp/hulk_crash.org")
@@ -162,10 +163,10 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/packages/lwl/goenv"))
 (require 'goenv)
 (defun my-nox-reconnect ()
-	(let* ((current-server (nox-current-server))
+    (let* ((current-server (nox-current-server))
          )
         (nox-reconnect current-server 't)
-		))
+        ))
 (defun gopath()
   (interactive)
   (goenv-activate (magit-toplevel))
@@ -273,16 +274,16 @@
 ;;   :diminish
 ;;   :init
 ;;   (setq company-posframe-quickhelp-delay nil
-;; 		company-posframe-quickhelp-show-header nil
-;; 		company-posframe-show-metadata nil
-;; 		company-posframe-show-indicator nil
-;; 		company-posframe-show-params (list :internal-border-color "dark gray"
-;; 										   :internal-border-width 1))
+;;      company-posframe-quickhelp-show-header nil
+;;      company-posframe-show-metadata nil
+;;      company-posframe-show-indicator nil
+;;      company-posframe-show-params (list :internal-border-color "dark gray"
+;;                                         :internal-border-width 1))
 ;;   :config
 ;;   (company-posframe-mode 1)
 ;;   (require 'desktop)
 ;;   (push '(company-posframe-mode . nil)
-;; 		desktop-minor-mode-table))
+;;      desktop-minor-mode-table))
 
     ;; (use-package company-box
     ;;   :diminish
@@ -392,11 +393,11 @@
     ("~/OneDrive/resource/600-todo/gtd.org" "~/OneDrive/resource/600-todo/someday.org")))
 (setq org-capture-templates
       '(("g" "GTD" entry (file+headline "~/OneDrive/resource/600-todo/gtd.org" "工作安排")
-			"* TODO [#B] %?\n  %i\n"
-			:empty-lines 1)
-		("s" "someday" entry (file+headline "~/OneDrive/resource/600-todo/someday.org" "some day")
+            "* TODO [#B] %?\n  %i\n"
+            :empty-lines 1)
+        ("s" "someday" entry (file+headline "~/OneDrive/resource/600-todo/someday.org" "some day")
                                "* TODO [#C] %U %i%?" :empty-lines 1)
-		))
+        ))
 (global-set-key (kbd "C-c r") 'org-capture)
 
 (setq org-todo-keywords
@@ -494,8 +495,8 @@
 (require 'ob-rust)
 ;;==========================================================================
 ;; yasnippet
-(use-package yasnippet 
-    :config (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")) 
+(use-package yasnippet
+    :config (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets"))
 (yas-global-mode 1)
 
 ;;==========================================================================
@@ -533,28 +534,28 @@
       (insert (format "[[file:%s]]" (file-relative-name destname (file-name-directory (buffer-file-name))))))))
 ;;==========================================================================
 ;; Emacs下最好用的终端仿真器，需要编译库，默认不开启
-(use-package 
+(use-package
   vterm
   :commands (vterm)
   :ensure t
   :bind (:map leader-key
               ("o t" . 'vterm)))
 ;; 括号匹配
-(use-package 
+(use-package
     smartparens
-	  :ensure t 
-	    :hook ('prog-mode . 'smartparens-global-mode))
+      :ensure t
+        :hook ('prog-mode . 'smartparens-global-mode))
 ;; 有道词典，非常有用
-(use-package 
+(use-package
   youdao-dictionary
   :commands (youdao-dictionary-search-at-point-posframe)
-  :ensure t 
-  :config (setq url-automatic-caching t) 
-  (which-key-add-key-based-replacements "C-x y" "有道翻译") 
-  :bind (("C-x y t" . 'youdao-dictionary-search-at-point+) 
-         ("C-x y g" . 'youdao-dictionary-search-at-point-posframe) 
-         ("C-x y p" . 'youdao-dictionary-play-voice-at-point) 
-         ("C-x y r" . 'youdao-dictionary-search-and-replace) 
+  :ensure t
+  :config (setq url-automatic-caching t)
+  (which-key-add-key-based-replacements "C-x y" "有道翻译")
+  :bind (("C-x y t" . 'youdao-dictionary-search-at-point+)
+         ("C-x y g" . 'youdao-dictionary-search-at-point-posframe)
+         ("C-x y p" . 'youdao-dictionary-play-voice-at-point)
+         ("C-x y r" . 'youdao-dictionary-search-and-replace)
          ("C-x y i" . 'youdao-doictionary-search-from-input)))
 
 ;; 用posframe在dired模式下显示文件内容
@@ -563,7 +564,7 @@
   :custom
   (dired-posframe-size-limit (* 100 1024 1024))
   :bind((:map dired-mode-map)
-		("C-*" . dired-posframe-mode)))
+        ("C-*" . dired-posframe-mode)))
 ;; 更改窗格布局
 (use-package rotate
   :ensure t)
@@ -573,7 +574,7 @@
   :ensure t)
 (use-package flymake-rust
   :ensure t
-  :hook ('rust-mode-hook 'flymake-rust-load))			 
+  :hook ('rust-mode-hook 'flymake-rust-load))
 ;; 增强了搜索功能
 (use-package swiper
   :bind
@@ -749,7 +750,7 @@ that before `projectile-switch-project' invokes
 Otherwise, this function calls `persp-switch' to switch to an
 existing perspective of the project unless we're already in that
 perspective."
-  (interactive) 
+  (interactive)
   (ivy-read (projectile-prepend-project-name "Switch to project: ")
             (if counsel-projectile-remove-current-project
                 (projectile-relevant-known-projects)

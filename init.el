@@ -26,10 +26,11 @@
 
 
 (setq-default indent-tabs-mode nil)
-(setq-default tab-width 4)
+(setq-default c-basic-offset 4
+              tab-width 4)
 (setq indent-line-function 'insert-tab)
-(setq c-default-style "linux"
-      c-basic-offset 4)
+(setq c-default-style "linux")
+(setq cpp-default-style "linux")
 
 (delete-selection-mode 1)
 
@@ -90,6 +91,13 @@
  '(dired-use-ls-dired nil)
  '(emojify-emojis-dir "~/.emacs.d/var/emojis")
  '(package-selected-packages
-   '(fzf meow chocolate-theme all-the-icons-ivy-rich shell-command+ company-statistics nyan-mode modus-operandi-theme tabbar centaur-tabs beacon which-key doom-themes gotest tao-theme yasnippet-snippets evil-smartparens yasnippet rust-mode go-complete evil-nerd-commenter cider protobuf-mode plantuml-mode counsel-etags graphviz-dot-mode doom-modeline ivy-xref yaml-mode markdown-mode treemacs-magit neotree treemacs-evil rainbow-delimiters highlight-parentheses treemacs ranger benchmark-init exec-path-from-shell evil evil-leader use-package dashboard ripgrep magit evil-magit company company-go posframe ivy ivy-posframe projectile counsel-projectile switch-window symbol-overlay all-the-icons srcery-theme company smooth-scrolling swiper counsel smartparens popwin org org-bullets go-mode python-mode eldoc-box))
+   '(find-file-in-project company-ctags lsp-mode fzf meow chocolate-theme all-the-icons-ivy-rich shell-command+ company-statistics nyan-mode modus-operandi-theme tabbar centaur-tabs beacon which-key doom-themes gotest tao-theme yasnippet-snippets evil-smartparens yasnippet rust-mode go-complete evil-nerd-commenter cider protobuf-mode plantuml-mode counsel-etags graphviz-dot-mode doom-modeline ivy-xref yaml-mode markdown-mode treemacs-magit neotree treemacs-evil rainbow-delimiters highlight-parentheses treemacs ranger benchmark-init exec-path-from-shell evil evil-leader use-package dashboard ripgrep magit evil-magit company company-go posframe ivy ivy-posframe projectile counsel-projectile switch-window symbol-overlay all-the-icons srcery-theme company smooth-scrolling swiper counsel smartparens popwin org org-bullets go-mode python-mode eldoc-box))
  '(posframe-mouse-banish nil)
+ '(safe-local-variable-values
+   '((eval progn
+           (require 'find-file-in-project)
+           (setq ffip-prune-patterns
+                 `("*/.ccls-cache" ,@ffip-prune-patterns))
+           (setq ffip-prune-patterns
+                 `(delete "*/bin" ,@ffip-prune-patterns)))))
  '(which-key-popup-type 'side-window))

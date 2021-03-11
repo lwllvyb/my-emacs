@@ -190,7 +190,12 @@
                 'c++-mode-hook
                 ))
    (add-hook hook '(lambda () (nox-ensure))))
-
+;;==========================================================================
+;; (use-package ccls
+;;   :load-path "~/.emacs.d/packages/emacs-ccls"
+;;   :config
+;;     (setq ccls-executable "/usr/local/bin/ccls"))
+;;==========================================================================
 ;;(require 'eglot)
 ;;(set eglot-put-doc-in-help-buffer nil)
 ;;(setq eglot-auto-display-help-buffer nil)
@@ -341,13 +346,8 @@
 
 ;;==========================================================================
 ;; symbol-overlay
-;;(let ((map (make-sparse-keymap)))
-;;  (define-key map (kbd "n") 'symbol-overlay-jump-next)
-;;  (define-key map (kbd "p") 'symbol-overlay-jump-prev)
-;;  (setq symbol-overlay-map map))
-;;(setq symbol-overlay-map (make-sparse-keymap))
-;; symbol-overlay
-;;;  a highlight-symbol replacement.
+(use-package symbol-overlay
+	:load-path "~/.emacs.d/packages/symbol-overlay")
 
 ;;==========================================================================
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/packages/awesome-tab"))
@@ -737,7 +737,11 @@ for the first action, etc) of the action to set as default."
                       (progn (select-frame (make-frame))
                              (dired project)))
             :require-match t))
-
+(defun lwl/goto-resource ()
+  ""
+  (interactive)
+  (progn (select-frame (make-frame))
+     (dired "~/OneDrive/resource")))
 ;; persp project
 (setq projectile-switch-project-action 'projectile-dired)
 (defun lwl/open-project-other-frame ()

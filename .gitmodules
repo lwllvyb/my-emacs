@@ -43,3 +43,9 @@
 [submodule "packages/lwl/evil-collection"]
 	path = packages/lwl/evil-collection
 	url = https://github.com/lwllvyb/evil-collection
+[submodule "packages/emacs-ccls"]
+	path = packages/emacs-ccls
+	url = https://github.com/MaskRay/emacs-ccls
+[submodule "packages/symbol-overlay"]
+	path = packages/symbol-overlay
+	url = https://github.com/lwllvyb/symbol-overlay

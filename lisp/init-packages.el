@@ -41,10 +41,11 @@
 			   ivy
 			   ivy-posframe
 			   switch-window
-			   symbol-overlay
+			   ;;symbol-overlay
                ;; project
 			   projectile
 			   counsel-projectile
+			   find-file-in-project
                ;; ui
                all-the-icons
                treemacs

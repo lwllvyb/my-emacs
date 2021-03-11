@@ -1,7 +1,8 @@
 (evil-leader/set-leader ",")
 (evil-leader/set-key
   "pa" 'projectile-discover-projects-in-directory
-  "pf" 'counsel-projectile-find-file
+  ;;"pf" 'counsel-projectile-find-file
+  "pf" 'find-file-in-project
   "pp" 'projectile-switch-project
   "pr" 'counsel-recentf
   ;"s" 'projectile-ripgrep
@@ -10,6 +11,7 @@
   "o"  'counsel-imenu
   "fr" 'xref-find-references
   "fd" 'xref-find-definitions
+  ;;"fd" 'counsel-etags-find-tag-at-point
   ;"f" 'counsel-find-file
   ;"fp" 'switch-to-buffer
   "bd" 'kill-buffer-and-window
@@ -20,7 +22,7 @@
   "k" 'symbol-overlay-put
   "K" 'symbol-overlay-remove-all
   "a" 'org-agenda
-  "t" 'goto-tmp
+  "t" 'lwl/goto-resource
   "nn" 'treemacs
   "cc" 'evilnc-comment-or-uncomment-lines
   "ww" 'toggle-maximize-buffer

@@ -22,12 +22,12 @@
 ;; 设置eshell历史记录
 (setq eshell-history-file-name "~/.emacs/var/eshell/history")
 
-;; 关闭滚动条
-;; (push '(scroll-bar-mode -1) graphic-only-plugins-setting)
-(scroll-bar-mode -1)
-
-;; 关闭工具栏
-(tool-bar-mode -1)
+(if (display-graphic-p)
+    (progn
+		;; 关闭滚动条
+		;; 关闭工具栏
+      (tool-bar-mode -1)
+      (scroll-bar-mode -1)))
 
 ;; 关闭菜单栏
 (menu-bar-mode -1)

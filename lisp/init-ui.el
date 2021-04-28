@@ -365,10 +365,10 @@
 ;;   :ensure t
 ;;   :config
 ;;  (load-theme 'chocolate t))
-(use-package lazycat-theme
-  :load-path "~/.emacs.d/packages/lazycat-theme"
-  :config
-  (lazycat-theme-load-with-sunrise))
+; (use-package lazycat-theme
+;   :load-path "~/.emacs.d/packages/lazycat-theme"
+;   :config
+;   (lazycat-theme-load-with-sunrise))
 ;; 高亮当前行
 (global-hl-line-mode 1)
 (set-face-background 'hl-line "#377d39")

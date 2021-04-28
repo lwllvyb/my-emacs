@@ -2,11 +2,6 @@
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
-;; 关闭工具栏，tool-bar-mode 即为一个 Minor Mode
-(tool-bar-mode -1)
-
-;; 关闭文件滑动控件
-(scroll-bar-mode -1)
 
 ;; 显示行号
 ;;(global-linum-mode 1)
@@ -86,7 +81,7 @@
  ;; If there is more than one, they won't work right.
  '(company-tooltip-align-annotations t)
  '(custom-safe-themes
-   '("835d5718b4457591384aac56ce76ab2230813388459d8353e5602b3fa5d1ece7" "e1ef2d5b8091f4953fe17b4ca3dd143d476c106e221d92ded38614266cea3c8b" "bc836bf29eab22d7e5b4c142d201bcce351806b7c1f94955ccafab8ce5b20208" "dbade2e946597b9cda3e61978b5fcc14fa3afa2d3c4391d477bdaeff8f5638c5" "801a567c87755fe65d0484cb2bded31a4c5bb24fd1fe0ed11e6c02254017acb2" default))
+   '("8f5a7a9a3c510ef9cbb88e600c0b4c53cdcdb502cfe3eb50040b7e13c6f4e78e" "835d5718b4457591384aac56ce76ab2230813388459d8353e5602b3fa5d1ece7" "e1ef2d5b8091f4953fe17b4ca3dd143d476c106e221d92ded38614266cea3c8b" "bc836bf29eab22d7e5b4c142d201bcce351806b7c1f94955ccafab8ce5b20208" "dbade2e946597b9cda3e61978b5fcc14fa3afa2d3c4391d477bdaeff8f5638c5" "801a567c87755fe65d0484cb2bded31a4c5bb24fd1fe0ed11e6c02254017acb2" default))
  '(dired-posframe-size-limit 104857600 t)
  '(dired-use-ls-dired nil)
  '(emojify-emojis-dir "~/.emacs.d/var/emojis")

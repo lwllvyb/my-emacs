@@ -2,15 +2,15 @@
 (evil-leader/set-key
   "pa" 'projectile-discover-projects-in-directory
   ;;"pf" 'counsel-projectile-find-file
-  "pf" 'find-file-in-project
+  "pf" 'counsel-fzf
   "pp" 'projectile-switch-project
   "pr" 'counsel-recentf
+  "r" 'counsel-recentf
   ;"s" 'projectile-ripgrep
   "ps" 'color-rg-search-project
-  "r" 'counsel-recentf
   "o"  'counsel-imenu
-  "fr" 'xref-find-references
-  "fd" 'xref-find-definitions
+  "gr" 'xref-find-references
+  "gd" 'xref-find-definitions
   ;;"fd" 'counsel-etags-find-tag-at-point
   ;"f" 'counsel-find-file
   ;"fp" 'switch-to-buffer
@@ -29,6 +29,8 @@
   "wn" 'switch-window
   "ee" 'org-edit-src-code
   "," 'execute-extended-command
+  "bn" 'awesome-tab-forward
+  "bp" 'awesome-tab-backward
   )
 
 (global-set-key (kbd "C-x o") 'switch-window)

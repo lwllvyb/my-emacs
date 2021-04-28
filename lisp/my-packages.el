@@ -81,7 +81,7 @@
 
 ;;==========================================================================
 ;; auto save desktop status
-;;(desktop-save-mode 1)
+(desktop-save-mode 1)
 ;;==========================================================================
 (require 'projectile)
 (require 'ivy)
@@ -222,57 +222,57 @@
 
 ;;==========================================================================
 ;; 著名的Emacs补全框架
-;;     (use-package company
-;;       :diminish
-;;       :init
-;;       (setq company-dabbrev-downcase 0)
-;;       (setq company-idle-delay 0)
-;;       (setq company-minimum-prefix-length 2)
-;;       (setq company-tooltip-align-annotations t)
-;;       (setq company-tooltip-limit 20)                      ; bigger popup window
-;;       (setq company-echo-delay 0)                          ; remove annoying blinking
-;;       (setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
-;;       (setq company-backends
-;;             '(
-;;               ;; company-clang
-;;               ;; company-xcode
-;;               ;; company-dabbrev
-;;               ;; company-yasnippet
-;;               company-semantic
-;;               company-cmake
-;;               company-capf
-;;               company-files
-;;               (company-dabbrev-code
-;;                company-gtags
-;;                company-etags
-;;                company-keywords)))
+	(use-package company
+	  :diminish
+	  :init
+	  (setq company-dabbrev-downcase 0)
+	  (setq company-idle-delay 0)
+	  (setq company-minimum-prefix-length 2)
+	  (setq company-tooltip-align-annotations t)
+	  (setq company-tooltip-limit 20)                      ; bigger popup window
+	  (setq company-echo-delay 0)                          ; remove annoying blinking
+	  (setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
+	  (setq company-backends
+			'(
+			  company-capf
+			  ;; company-clang
+			  ;; company-xcode
+			  ;; company-dabbrev
+			  ;; company-yasnippet
+			  company-semantic
+			  company-cmake
+			  company-files
+			  (company-dabbrev-code
+			   company-gtags
+			   company-etags
+			   company-keywords)))
 
-;;       :bind
-;;       (:map company-active-map
-;;             ("C-n" . company-select-next)
-;;             ("C-p" . company-select-previous))
+	  :bind
+	  (:map company-active-map
+			("C-n" . company-select-next)
+			("C-p" . company-select-previous))
 
-;;       :hook
-;;       (prog-mode . company-mode)
-;;       :config
-;;       (unbind-key "M-n" company-active-map)
-;;       (unbind-key "M-p" company-active-map))
+	  :hook
+	  (prog-mode . company-mode)
+	  :config
+	  (unbind-key "M-n" company-active-map)
+	  (unbind-key "M-p" company-active-map))
 
-;;     (use-package company-statistics
-;;       :hook
-;;       (after-init . company-statistics-mode))
-
-;;     (use-package yasnippet
-;;       :diminish
-;;       :hook
-;;       (prog-mode . yas-minor-mode)
-;;       :config
-;;       (use-package yasnippet-snippets :ensure t)
-;;       (yas-reload-all)
-
-;;       :bind
-;;       (:map yas-minor-mode-map
-;;             ("TAB" . nil)))
+	; (use-package company-statistics
+	;   :hook
+	;   (after-init . company-statistics-mode))
+    ;
+	; (use-package yasnippet
+	;   :diminish
+	;   :hook
+	;   (prog-mode . yas-minor-mode)
+	;   :config
+	;   (use-package yasnippet-snippets :ensure t)
+	;   (yas-reload-all)
+    ;
+	;   :bind
+	;   (:map yas-minor-mode-map
+	;         ("TAB" . nil)))
 
 ;; (use-package company-posframe
 ;;   :load-path "~/.emacs.d/packages/company-posframe"

@@ -8,6 +8,8 @@
 ;; AUTHOR: EvanMeek the_lty_mail@foxmail.com
 
 ;; CODE:
+(when (string= system-type "darwin")
+  (setq dired-use-ls-dired nil))
 
 (setq select-enable-primary t)
 ;; yes-or-no-p to y-or-n-p
@@ -22,15 +24,6 @@
 ;; 设置eshell历史记录
 (setq eshell-history-file-name "~/.emacs/var/eshell/history")
 
-(if (display-graphic-p)
-    (progn
-		;; 关闭滚动条
-		;; 关闭工具栏
-      (tool-bar-mode -1)
-      (scroll-bar-mode -1)))
-
-;; 关闭菜单栏
-(menu-bar-mode -1)
 
 ;; 自动刷新被修改过的文件
 (global-auto-revert-mode +1)
@@ -39,6 +32,8 @@
 (add-hook 'after-init-hook
           (lambda () (delete-selection-mode +1)))
 
+;; 关闭启动帮助画面
+(setq inhibit-splash-screen 1)
 
 ;; 关闭GUI功能
 (setq use-file-dialog nil
@@ -107,8 +102,8 @@
 (add-hook 'after-change-major-mode-hook (lambda ()
                                           (modify-syntax-entry ?_ "w")))
 ;; "-" 同上)
-(add-hook 'after-change-major-mode-hook (lambda ()
-                                          (modify-syntax-entry ?- "w")))
+; (add-hook 'after-change-major-mode-hook (lambda ()
+;                                           (modify-syntax-entry ?- "w")))
 ;; 允许插入制表符
 (setq-default indent-tabs-mode nil)
 ;; 制表符宽度
@@ -139,5 +134,8 @@
 
 ;; 默认目录为~/.emacs.d/
 (cd "~/.emacs.d/")
+
+(unless package-archive-contents
+  (package-refresh-contents))
 
 (provide 'init-basic)

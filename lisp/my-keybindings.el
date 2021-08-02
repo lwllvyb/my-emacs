@@ -2,7 +2,8 @@
 (evil-leader/set-key
   "pa" 'projectile-discover-projects-in-directory
   ;;"pf" 'counsel-projectile-find-file
-  "pf" 'counsel-fzf
+  ;;"pf" 'counsel-fzf
+  "pf" 'counsel-file-jump
   "pp" 'projectile-switch-project
   "pr" 'counsel-recentf
   "r" 'counsel-recentf
@@ -19,6 +20,7 @@
   "md" 'bookmark-delete
   "gs" 'magit-status
   "gb" 'magit-blame
+  "gl" 'magit-log-buffer-file ;; 显示一行的git操作记录
   "k" 'symbol-overlay-put
   "K" 'symbol-overlay-remove-all
   "a" 'org-agenda
@@ -56,6 +58,11 @@
      (evil-make-overriding-map color-rg-mode-map 'normal)
      ;; force update evil keymaps after git-timemachine-mode loaded
      (add-hook 'color-rg-mode-hook #'evil-normalize-keymaps)))
+
+(setf org-blank-before-new-entry '((heading . nil) (plain-list-item . nil)))
+;; config key map for org-mode
+(define-key org-mode-map (kbd "<s-return>") 'org-insert-todo-heading)
+
 
 ;; 文件末尾
 (provide 'my-keybindings)

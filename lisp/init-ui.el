@@ -100,7 +100,7 @@
 ;;                  (eaf-setq eaf-browser-dark-mode "false")
 ;;                  (eaf-setq eaf-mindmap-dark-mode "false"))))))
 
-(load-theme 'doom-tomorrow-night t)
+(load-theme 'doom-one t)
 
 (progn
   ;; 图标支持
@@ -373,6 +373,14 @@
 (global-hl-line-mode 1)
 (set-face-background 'hl-line "#377d39")
 (set-face-foreground 'highlight nil)
+;; 更改显示字体大小 16pt
+;; http://stackoverflow.com/questions/294664/how-to-set-the-font-size-in-emacs
+(set-face-attribute 'default nil :height 160)
+;; 最近打开的文件
+(recentf-mode)
+;; 显示行号
+;;(global-linum-mode 1)
+
 ;; (use-package fira-code-mode
 ;;   :ensure t
 ;;   :hook (prog-mode . fira-code-mode))

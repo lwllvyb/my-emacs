@@ -81,7 +81,7 @@
 
 ;;==========================================================================
 ;; auto save desktop status
-(desktop-save-mode 1)
+;;(desktop-save-mode 1)
 ;;==========================================================================
 (require 'projectile)
 (require 'ivy)
@@ -190,6 +190,7 @@
                 ; 'c++-mode-hook
                 ))
    (add-hook hook '(lambda () (nox-ensure))))
+(setq nox-python-server "pyls")
 ;;==========================================================================
 ;; (use-package ccls
 ;;   :load-path "~/.emacs.d/packages/emacs-ccls"
@@ -222,57 +223,57 @@
 
 ;;==========================================================================
 ;; 著名的Emacs补全框架
-	(use-package company
-	  :diminish
-	  :init
-	  (setq company-dabbrev-downcase 0)
-	  (setq company-idle-delay 0)
-	  (setq company-minimum-prefix-length 2)
-	  (setq company-tooltip-align-annotations t)
-	  (setq company-tooltip-limit 20)                      ; bigger popup window
-	  (setq company-echo-delay 0)                          ; remove annoying blinking
-	  (setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
-	  (setq company-backends
-			'(
-			  company-capf
-			  ;; company-clang
-			  ;; company-xcode
-			  ;; company-dabbrev
-			  ;; company-yasnippet
-			  company-semantic
-			  company-cmake
-			  company-files
-			  (company-dabbrev-code
-			   company-gtags
-			   company-etags
-			   company-keywords)))
+    (use-package company
+      :diminish
+      :init
+      (setq company-dabbrev-downcase 0)
+      (setq company-idle-delay 0)
+      (setq company-minimum-prefix-length 2)
+      (setq company-tooltip-align-annotations t)
+      (setq company-tooltip-limit 20)                      ; bigger popup window
+      (setq company-echo-delay 0)                          ; remove annoying blinking
+      (setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
+      (setq company-backends
+            '(
+              ;; company-clang
+              ;; company-xcode
+              ;; company-dabbrev
+              ;; company-yasnippet
+              company-semantic
+              company-cmake
+              company-files
+              (company-dabbrev-code
+               ;;company-gtags
+               ;;company-etags
+               company-keywords)
+              company-capf))
 
-	  :bind
-	  (:map company-active-map
-			("C-n" . company-select-next)
-			("C-p" . company-select-previous))
+      :bind
+      (:map company-active-map
+            ("C-n" . company-select-next)
+            ("C-p" . company-select-previous))
 
-	  :hook
-	  (prog-mode . company-mode)
-	  :config
-	  (unbind-key "M-n" company-active-map)
-	  (unbind-key "M-p" company-active-map))
+      :hook
+      (prog-mode . company-mode)
+      :config
+      (unbind-key "M-n" company-active-map)
+      (unbind-key "M-p" company-active-map))
 
-	; (use-package company-statistics
-	;   :hook
-	;   (after-init . company-statistics-mode))
+    ; (use-package company-statistics
+    ;   :hook
+    ;   (after-init . company-statistics-mode))
     ;
-	; (use-package yasnippet
-	;   :diminish
-	;   :hook
-	;   (prog-mode . yas-minor-mode)
-	;   :config
-	;   (use-package yasnippet-snippets :ensure t)
-	;   (yas-reload-all)
+    ; (use-package yasnippet
+    ;   :diminish
+    ;   :hook
+    ;   (prog-mode . yas-minor-mode)
+    ;   :config
+    ;   (use-package yasnippet-snippets :ensure t)
+    ;   (yas-reload-all)
     ;
-	;   :bind
-	;   (:map yas-minor-mode-map
-	;         ("TAB" . nil)))
+    ;   :bind
+    ;   (:map yas-minor-mode-map
+    ;         ("TAB" . nil)))
 
 ;; (use-package company-posframe
 ;;   :load-path "~/.emacs.d/packages/company-posframe"
@@ -347,7 +348,7 @@
 ;;==========================================================================
 ;; symbol-overlay
 (use-package symbol-overlay
-	:load-path "~/.emacs.d/packages/symbol-overlay")
+    :load-path "~/.emacs.d/packages/symbol-overlay")
 
 ;;==========================================================================
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/packages/awesome-tab"))
@@ -737,11 +738,8 @@ for the first action, etc) of the action to set as default."
                       (progn (select-frame (make-frame))
                              (dired project)))
             :require-match t))
-(defun lwl/goto-resource ()
-  ""
-  (interactive)
-  (progn (select-frame (make-frame))
-     (dired "~/OneDrive/resource")))
+
+
 ;; persp project
 (setq projectile-switch-project-action 'projectile-dired)
 (defun lwl/open-project-other-frame ()
@@ -794,31 +792,31 @@ perspective."
     (set-buffer-major-mode  buffer)
     (display-buffer buffer '(display-buffer-pop-up-window . nil))))
 ;;==========================================================================
-(use-package counsel-etags
-  :ensure t
-  :bind (("C-]" . counsel-etags-find-tag-at-point))
-  :init
-  (add-hook 'prog-mode-hook
-        (lambda ()
-          (add-hook 'after-save-hook
-            'counsel-etags-virtual-update-tags 'append 'local)))
-  :config
-  (setq counsel-etags-update-interval 60))
-(with-eval-after-load 'counsel-etags
-  ;; counsel-etags-ignore-directories does NOT support wildcast
-  (push "build" counsel-etags-ignore-directories)
-  (push ".ccls-cache" counsel-etags-ignore-directories)
-  ;; counsel-etags-ignore-filenames supports wildcast
-  (push "TAGS" counsel-etags-ignore-filenames))
-;; Don't ask before rereading the TAGS files if they have changed
-(setq tags-revert-without-query t)
-;; Don't warn when TAGS files are large
-(setq large-file-warning-threshold nil)
-;; Setup auto update now
-(add-hook 'prog-mode-hook
-  (lambda ()
-    (add-hook 'after-save-hook
-              'counsel-etags-virtual-update-tags 'append 'local)))
+;; (use-package counsel-etags
+;;   :ensure t
+;;   :bind (("C-]" . counsel-etags-find-tag-at-point))
+;;   :init
+;;   (add-hook 'prog-mode-hook
+;;         (lambda ()
+;;           (add-hook 'after-save-hook
+;;             'counsel-etags-virtual-update-tags 'append 'local)))
+;;   :config
+;;   (setq counsel-etags-update-interval 60))
+;; (with-eval-after-load 'counsel-etags
+;;   ;; counsel-etags-ignore-directories does NOT support wildcast
+;;   (push "build" counsel-etags-ignore-directories)
+;;   (push ".ccls-cache" counsel-etags-ignore-directories)
+;;   ;; counsel-etags-ignore-filenames supports wildcast
+;;   (push "TAGS" counsel-etags-ignore-filenames))
+;; ;; Don't ask before rereading the TAGS files if they have changed
+;; (setq tags-revert-without-query t)
+;; ;; Don't warn when TAGS files are large
+;; (setq large-file-warning-threshold nil)
+;; ;; Setup auto update now
+;; (add-hook 'prog-mode-hook
+;;   (lambda ()
+;;     (add-hook 'after-save-hook
+;;               'counsel-etags-virtual-update-tags 'append 'local)))
 ;;==========================================================================
 ;; 文件末尾
 (provide 'my-packages)

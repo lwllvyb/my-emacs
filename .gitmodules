@@ -49,3 +49,9 @@
 [submodule "packages/symbol-overlay"]
 	path = packages/symbol-overlay
 	url = https://github.com/lwllvyb/symbol-overlay
+[submodule "packages/benchmark-init-el"]
+	path = packages/benchmark-init-el
+	url = https://github.com/dholm/benchmark-init-el
+[submodule "packages/citre"]
+	path = packages/citre
+	url = https://github.com/universal-ctags/citre

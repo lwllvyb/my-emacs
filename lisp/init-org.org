@@ -1,0 +1,27 @@
+# Created 2021-07-12 一 19:13
+#+TITLE:
+#+AUTHOR: leewish
+;; File              : lisp/init-packages.el
+;; Author            : liwenlong03 <liwenlong03>
+;; Date              : 2020.09.05
+;; Last Modified Date: 2020.09.05
+;; Last Modified By  : liwenlong03 <liwenlong03>
+;;  __        __             __   ___
+;; |__)  /\  /  ` |__/  /\  / _` |__
+;; |    /~~\ \__, |  \ /~~\ \__> |___
+;;                      __   ___        ___      ___
+;; |\/|  /\  |\ |  /\  / _` |__   |\/| |__  |\ |  |
+;; |  | /~~\ | \| /~~\ \__> |___  |  | |___ | \|  |
+(setq org-plantuml-jar-path
+   (expand-file-name "/Users/leewish/work/bin/plantuml.jar"))
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '(;; other Babel languages
+   (plantuml . t)))
+   (add-hook 'org-babel-after-execute-hook
+          (lambda ()
+            (when org-inline-image-overlays
+              (org-redisplay-inline-images))))
+
+;; 文件末尾
+(provide 'init-org)

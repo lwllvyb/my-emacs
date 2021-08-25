@@ -66,13 +66,15 @@
                counsel
                smartparens
                popwin
-               flymake-rust
+               ;; flymake-rust
+               flycheck
                ;; --- Major Mode ---
                org
                org-bullets
                org-download
                go-mode
                python-mode
+               python-black
                rust-mode
                ;; lsp
                ;;eglot

@@ -573,9 +573,9 @@
 ;; 命令日志
 (use-package command-log-mode
   :ensure t)
-(use-package flymake-rust
-  :ensure t
-  :hook ('rust-mode-hook 'flymake-rust-load))
+;;(use-package flymake-rust
+;;  :ensure t
+;;  :hook ('rust-mode-hook 'flymake-rust-load))
 ;; 增强了搜索功能
 (use-package swiper
   :bind
@@ -818,5 +818,21 @@ perspective."
 ;;     (add-hook 'after-save-hook
 ;;               'counsel-etags-virtual-update-tags 'append 'local)))
 ;;==========================================================================
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode)
+  (setq flycheck-pylintrc "~/.emacs.d/config/python/pylintrc")
+  (setq flycheck-flake8rc "~/.emacs.d/config/python/flake8rc")
+  :config (flycheck-add-next-checker 'python-flake8 'python-pylint))
+
+(use-package python-black
+  :demand t
+  :after python
+  :hook (python-mode . python-black-on-save-modess))
+
+(custom-set-variables
+ '(flycheck-python-flake8-executable "python2")
+ '(flycheck-python-pycompile-executable "python2")
+ '(flycheck-python-pylint-executable "python2"))
 ;; 文件末尾
 (provide 'my-packages)
